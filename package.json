@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "prettier": "npx onchange '**' -- npx prettier@2.0.5 . --write"
   },
   "repository": {
