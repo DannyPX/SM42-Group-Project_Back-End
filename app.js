@@ -35,6 +35,10 @@ app.get("/docs/user", function (req, res) {
 });
 
 // App listeners
+app.get("/", function (req, res) {
+  res.redirect("/docs");
+});
+
 /// API
 app.get("/api", function (req, res) {
   res.status(200);
