@@ -35,3 +35,35 @@ app.get("/docs/user", function (req, res) {
 });
 
 // App listeners
+/// User
+app.post("/api/user", function (req, res) {
+  res.status(501);
+  res.json(userContext.createUser());
+});
+
+app.get("/api/user", function (req, res) {
+  if (Object.keys(req.query).length === 0) {
+    // Get one user
+    res.status(501);
+    res.json(userContext.getUser());
+  } else {
+    // Get all users
+    res.status(501);
+    res.json(userContext.getAllUser());
+  }
+});
+
+app.put("/api/user", function (req, res) {
+  res.status(501);
+  res.json(userContext.updateUser());
+});
+
+app.delete("/api/user", function (req, res) {
+  res.status(501);
+  res.json(userContext.deleteUser());
+});
+
+app.post("/api/user/auth", function (req, res) {
+  res.status(501);
+  res.json(userContext.authUser());
+});

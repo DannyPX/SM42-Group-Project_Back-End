@@ -17,3 +17,30 @@
 // Local Module Dependency Injection
 
 /* Node.js module: userContext */
+const defaultResponse = {
+  status: null,
+};
+
+exports.createUser = function () {
+  return defaultResponse;
+};
+
+exports.getAllUser = function () {
+  return defaultResponse;
+};
+
+exports.updateUser = function () {
+  return defaultResponse;
+};
+
+exports.deleteUser = function () {
+  return defaultResponse;
+};
+
+exports.getUser = function () {
+  return defaultResponse;
+};
+
+exports.authUser = function () {
+  return defaultResponse;
+};

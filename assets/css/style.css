@@ -52,8 +52,6 @@ h3:hover a.anchor,
 h4:hover a.anchor,
 h5:hover a.anchor,
 h6:hover a.anchor {
-  background: url("../../images/modules/styleguide/para.png") no-repeat 10px
-    center;
   text-decoration: none;
 }
 
@@ -127,8 +125,7 @@ pre {
 }
 
 hr {
-  background: transparent url("../../images/modules/pulls/dirty-shade.png")
-    repeat-x 0 0;
+  background-color: #cccccc;
   border: 0 none;
   color: #cccccc;
   height: 4px;

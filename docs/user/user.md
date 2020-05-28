@@ -3,9 +3,7 @@
 |         |             |
 | ------- | ----------- |
 | Base    | `/api/user` |
-| Version | `0.1.V1`    |
-
----
+| Version | `.V1`       |
 
 ## `POST /api/user{params}`
 
@@ -31,8 +29,6 @@
 }
 ```
 
----
-
 ## `GET /api/user`
 
 > Description: Get all users
@@ -52,8 +48,6 @@
   "status": null
 }
 ```
-
----
 
 ## `PUT /api/user{params}`
 
@@ -80,8 +74,6 @@
 }
 ```
 
----
-
 ## `DELETE /api/user{params}`
 
 > Description: Delete a user
@@ -102,8 +94,6 @@
 }
 ```
 
----
-
 ## `GET /api/user{params}`
 
 > Description: Get one user
@@ -123,8 +113,6 @@
   "status": null
 }
 ```
-
----
 
 ## `POST /api/user/auth{params}`
 

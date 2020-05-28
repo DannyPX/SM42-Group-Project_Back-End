@@ -16,7 +16,7 @@
 |         |              |
 | ------- | ------------ |
 | Base    | `/api/user`  |
-| Version | `0.1.V1`     |
+| Version | `.V1`        |
 | Docs    | `/docs/user` |
 
 | Request                       | Description         |
@@ -27,3 +27,29 @@
 | `DELETE /api/user{params}`    | Delete a user       |
 | `GET /api/user{params}`       | Get one user        |
 | `POST /api/user/auth{params}` | Authenticate a user |
+
+## Version History
+
+### `V0.1`
+
+#### Changelog
+
+- Added user docs `.V1`
+  - Added requests
+  - Added descriptions
+  - Added parameters
+  - Added mock response
+- Added home docs
+  - Added user section
+- Added express endpoints
+  - Added user API
+    - Added default response
+
+### `V0.2 WIP`
+
+#### Changelog
+
+- Connect MongoDB
+- Token Manager (JWT) \*
+  - User encrypted \*
+- Body request handlers instead of query
