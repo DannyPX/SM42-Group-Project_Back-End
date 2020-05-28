@@ -35,6 +35,21 @@ app.get("/docs/user", function (req, res) {
 });
 
 // App listeners
+/// API
+app.get("/api", function (req, res) {
+  res.status(200);
+  res.json({
+    status: 200,
+    api: {
+      user: 501,
+      nb: 503,
+      buddy: 503,
+      events: 503,
+    },
+    db: unknown,
+  });
+});
+
 /// User
 app.post("/api/user", function (req, res) {
   res.status(501);
