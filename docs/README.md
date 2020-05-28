@@ -4,10 +4,10 @@
 
 > Author:
 
-| Base name | URL          |
-| --------- | ------------ |
-| User API  | `/api/user`  |
-| User Docs | `/docs/user` |
+| Base name | URL                                       |
+| --------- | ----------------------------------------- |
+| API       | `https://global-buddy.herokuapp.com/api`  |
+| Docs      | `https://global-buddy.herokuapp.com/docs` |
 
 ## API Sections
 
@@ -28,6 +28,48 @@
 | `GET /api/user{params}`       | Get one user        |
 | `POST /api/user/auth{params}` | Authenticate a user |
 
+## Javascript Usage (no Auth requests)
+
+### Axios
+
+```js
+let data = JSON.stringify({
+  {parameterName}: {value}
+});
+axios
+  .{typeRequest}(apiURL + "/{requestName}", data, {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    // Your code
+  })
+  .catch(error => {
+    // Error handling
+  })
+```
+
+### Fetch
+
+```js
+fetch("apiURL" + "/{requestName}", {
+  method: '{typeRequest}',
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    {parameterName}: {value}
+  })
+})
+.then(response => {
+  // Your code
+})
+.catch(error => {
+  // Error handling
+})
+```
+
 ## Version History
 
 ### `V0.1`
@@ -41,6 +83,7 @@
   - Added mock response
 - Added home docs
   - Added user section
+  - Added JS examples
 - Added express endpoints
   - Added user API
     - Added default response
@@ -54,4 +97,4 @@
   - User encrypted \*
 - Body request handlers instead of query
 
-Test
+\* Might not want to use JWT

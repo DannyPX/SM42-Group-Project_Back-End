@@ -369,12 +369,12 @@
       </thead>
       <tbody>
         <tr>
-          <td>User API</td>
-          <td><code>/api/user</code></td>
+          <td>API</td>
+          <td><code>https://global-buddy.herokuapp.com/api</code></td>
         </tr>
         <tr>
-          <td>User Docs</td>
-          <td><code>/docs/user</code></td>
+          <td>Docs</td>
+          <td><code>https://global-buddy.herokuapp.com/docs</code></td>
         </tr>
       </tbody>
     </table>
@@ -436,6 +436,41 @@
         </tr>
       </tbody>
     </table>
+    <h2 id="javascript-usage-no-auth-requests">
+      Javascript Usage (no Auth requests)
+    </h2>
+    <h3 id="axios">Axios</h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  {parameterName}: {value}
+});
+axios
+  .{typeRequest}(apiURL + &quot;/{requestName}&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;
+    }
+  })
+  .then(response =&gt; {
+    // Your code
+  })
+  .catch(error =&gt; {
+    // Error handling
+  })</code></pre>
+    <h3 id="fetch">Fetch</h3>
+    <pre><code class="language-js">fetch(&quot;apiURL&quot; + &quot;/{requestName}&quot;, {
+  method: &#39;{typeRequest}&#39;,
+  headers: {
+    &quot;Content-Type&quot;: &quot;application/json&quot;
+  },
+  body: JSON.stringify({
+    {parameterName}: {value}
+  })
+})
+.then(response =&gt; {
+  // Your code
+})
+.catch(error =&gt; {
+  // Error handling
+})</code></pre>
     <h2 id="version-history">Version History</h2>
     <h3 id="v01"><code>V0.1</code></h3>
     <h4 id="changelog">Changelog</h4>
@@ -453,6 +488,7 @@
         Added home docs
         <ul>
           <li>Added user section</li>
+          <li>Added JS examples</li>
         </ul>
       </li>
       <li>
@@ -479,6 +515,6 @@
       </li>
       <li>Body request handlers instead of query</li>
     </ul>
-    <p>Test</p>
+    <p>* Might not want to use JWT</p>
   </body>
 </html>
