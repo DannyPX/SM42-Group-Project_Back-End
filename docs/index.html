@@ -363,6 +363,24 @@
     <blockquote>
       <p>Author:</p>
     </blockquote>
+    <table>
+      <thead>
+        <tr>
+          <th>Base name</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>User API</td>
+          <td><code>/api/user</code></td>
+        </tr>
+        <tr>
+          <td>User Docs</td>
+          <td><code>/docs/user</code></td>
+        </tr>
+      </tbody>
+    </table>
     <h2 id="api-sections">API Sections</h2>
     <h3 id="user">User</h3>
     <table>
@@ -384,6 +402,40 @@
         <tr>
           <td>Docs</td>
           <td><code>/docs/user</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>POST /api/user{params}</code></td>
+          <td>Create a user</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/user</code></td>
+          <td>Get all users</td>
+        </tr>
+        <tr>
+          <td><code>PUT /api/user</code></td>
+          <td>Update a user</td>
+        </tr>
+        <tr>
+          <td><code>DELETE /api/user{params}</code></td>
+          <td>Delete a user</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/user{params}</code></td>
+          <td>Get one user</td>
+        </tr>
+        <tr>
+          <td><code>POST /api/user/auth{params}</code></td>
+          <td>Authenticate a user</td>
         </tr>
       </tbody>
     </table>

@@ -128,7 +128,7 @@
 
 ## `POST /api/user/auth{params}`
 
-> Description: Auth a user
+> Description: Authenticate a user
 
 ### **Query Parameters**
 
