@@ -1,16 +1,14 @@
 const marked = require("marked");
 const fs = require("fs");
 
-exports.init = function () {
-  // Home
-  var mdFile = fs.readFileSync("./docs/home.md", "utf-8");
-  var markdownReadMe = marked(mdFile);
-  fs.writeFileSync("./docs/index.html", addCSS(markdownReadMe));
+const docList = ["./docs/", "./docs/user/"];
 
-  // User
-  var mdFile = fs.readFileSync("./docs/user/user.md", "utf-8");
-  var markdownReadMe = marked(mdFile);
-  fs.writeFileSync("./docs/user/index.html", addCSS(markdownReadMe));
+exports.init = function () {
+  docList.forEach((url) => {
+    var mdFile = fs.readFileSync(url + "README.md", "utf-8");
+    var markdownReadMe = marked(mdFile);
+    fs.writeFileSync(url + "index.html", addCSS(markdownReadMe));
+  });
 };
 
 function addCSS(markdown) {
