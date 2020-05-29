@@ -1,6 +1,6 @@
-# Global Buddy
+# Local Buddy
 
-> Version: `0.1`
+> Version: `0.2`
 
 > Author:
 
@@ -16,7 +16,7 @@
 |         |              |
 | ------- | ------------ |
 | Base    | `/api/user`  |
-| Version | `.V1`        |
+| Version | `.V2`        |
 | Docs    | `/docs/user` |
 
 | Request                       | Description         |
@@ -88,13 +88,9 @@ fetch("apiURL" + "/{requestName}", {
   - Added user API
     - Added default response
 
-### `V0.2 WIP`
+### `V0.2`
 
 #### Changelog
 
 - Connect MongoDB
-- Token Manager (JWT) \*
-  - User encrypted \*
 - Body request handlers instead of query
-
-\* Might not want to use JWT

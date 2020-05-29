@@ -3,7 +3,7 @@
 |         |             |
 | ------- | ----------- |
 | Base    | `/api/user` |
-| Version | `.V1`       |
+| Version | `.V2`       |
 
 ## `POST /api/user{params}`
 
@@ -11,21 +11,48 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description           | Format     |
-| -------- | ----------- | ------- | --------------------- | ---------- |
-| x        | `username`  | -       | Username of a user    | `string`   |
-| x        | `password`  | -       | Password of a user    | `string`   |
-| x        | `name`      | -       | Name of a user        | `string`   |
-|          | `pc`        | -       | Postal Code of a user | `nnnnss`   |
-|          | `birthdate` | -       | Birthdate of a user   | `ddMMyyyy` |
+| Required | Paramenters | Default | Description           | Format   |
+| -------- | ----------- | ------- | --------------------- | -------- |
+| x        | `username`  | -       | Username of a user    | `string` |
+| x        | `password`  | -       | Password of a user    | `string` |
+| x        | `name`      | -       | Name of a user        | `string` |
+|          | `pc`        | -       | Postal Code of a user | `nnnnss` |
 
-### **Example response**
+### **Example**
 
-> `POST .../api/user?username=TestUser&password=**********&name=Danny`
+```js
+let data = JSON.stringify({
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .post(apiURL + "/user", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 201
 {
-  "status": null
+    "status": 201,
+    "user": {
+        "_id": "***",
+        "username": "***",
+        "name": "***",
+        "pc": "***"
+    }
 }
 ```
 
@@ -39,13 +66,42 @@
 | -------- | ----------- | ------- | ----------- | ------ |
 
 
-### **Example response**
+### **Example**
 
-> `GET .../api/user`
+```js
+let data = JSON.stringify({
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .get(apiURL + "/user")
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 200
 {
-  "status": null
+    "status": 200,
+    "users": [
+      {
+        "_id": "***",
+        "username": "***",
+        "name": "***",
+        "pc": "***"
+      },
+      {
+        ...
+      }
+    ]
 }
 ```
 
@@ -55,22 +111,50 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description           | Format     |
-| -------- | ----------- | ------- | --------------------- | ---------- |
-| x        | `id`        | -       | ID of a user          | `int`      |
-|          | `username`  | -       | Username of a user    | `string`   |
-|          | `password`  | -       | Password of a user    | `string`   |
-|          | `name`      | -       | Name of a user        | `string`   |
-|          | `pc`        | -       | Postal Code of a user | `nnnnss`   |
-|          | `birthdate` | -       | Birthdate of a user   | `ddMMyyyy` |
+| Required | Paramenters | Default | Description           | Format   |
+| -------- | ----------- | ------- | --------------------- | -------- |
+| x        | `id`        | -       | ID of a user          | `int`    |
+|          | `username`  | -       | Username of a user    | `string` |
+|          | `password`  | -       | Password of a user    | `string` |
+|          | `name`      | -       | Name of a user        | `string` |
+|          | `pc`        | -       | Postal Code of a user | `nnnnss` |
 
-### **Example response**
+### **Example**
 
-> `PUT .../api/user?id=1&username=TestUserChange&birthdate=14031999`
+```js
+let data = JSON.stringify({
+  _id: { value },
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .put(apiURL + "/user", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 201
 {
-  "status": null
+    "status": 201,
+    "user": {
+        "_id": "***",
+        "username": "***",
+        "name": "***",
+        "pc": "***"
+    }
 }
 ```
 
@@ -84,13 +168,32 @@
 | -------- | ----------- | ------- | ------------ | ------ |
 | x        | `id`        | -       | ID of a user | `int`  |
 
-### **Example response**
+### **Example**
 
-> `DELETE .../api/user?id=1`
+```js
+let data = JSON.stringify({
+  _id: { value },
+});
+axios
+  .delete(apiURL + "/user", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 410
 {
-  "status": null
+    "status": 410
 }
 ```
 
@@ -104,13 +207,34 @@
 | -------- | ----------- | ------- | ------------ | ------ |
 | x        | `id`        | -       | ID of a user | `int`  |
 
-### **Example response**
+### **Example**
 
-> `GET .../api/user?id=1`
+```js
+let data = JSON.stringify({
+  _id: { value },
+});
+axios
+  .get(apiURL + "/user")
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 200
 {
-  "status": null
+    "status": 201,
+    "user": {
+        "_id": "***",
+        "username": "***",
+        "name": "***",
+        "pc": "***"
+    }
 }
 ```
 
