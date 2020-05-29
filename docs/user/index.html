@@ -368,7 +368,7 @@
         </tr>
         <tr>
           <td>Version</td>
-          <td><code>.V1</code></td>
+          <td><code>.V2</code></td>
         </tr>
       </tbody>
     </table>
@@ -418,17 +418,36 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response"><strong>Example response</strong></h3>
-    <blockquote>
-      <p>
-        <code
-          >POST
-          .../api/user?username=TestUser&amp;password=**********&amp;name=Danny</code
-        >
-      </p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .post(apiURL + &quot;/user&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    },
+  })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 201
+{
+    &quot;status&quot;: 201,
+    &quot;user&quot;: {
+        &quot;_id&quot;: &quot;***&quot;,
+        &quot;username&quot;: &quot;***&quot;,
+        &quot;name&quot;: &quot;***&quot;,
+        &quot;pc&quot;: &quot;***&quot;
+    }
 }</code></pre>
     <h2 id="get-apiuser"><code>GET /api/user</code></h2>
     <blockquote>
@@ -446,12 +465,37 @@
         </tr>
       </thead>
     </table>
-    <h3 id="example-response-1"><strong>Example response</strong></h3>
-    <blockquote>
-      <p><code>GET .../api/user</code></p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example-1"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .get(apiURL + &quot;/user&quot;)
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 200
+{
+    &quot;status&quot;: 200,
+    &quot;users&quot;: [
+      {
+        &quot;_id&quot;: &quot;***&quot;,
+        &quot;username&quot;: &quot;***&quot;,
+        &quot;name&quot;: &quot;***&quot;,
+        &quot;pc&quot;: &quot;***&quot;
+      },
+      {
+        ...
+      }
+    ]
 }</code></pre>
     <h2 id="put-apiuserparams"><code>PUT /api/user{params}</code></h2>
     <blockquote>
@@ -506,17 +550,37 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response-2"><strong>Example response</strong></h3>
-    <blockquote>
-      <p>
-        <code
-          >PUT
-          .../api/user?id=1&amp;username=TestUserChange&amp;birthdate=14031999</code
-        >
-      </p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example-2"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  _id: { value },
+  username: { value },
+  password: { value },
+  name: { value },
+  pc: { value },
+});
+axios
+  .put(apiURL + &quot;/user&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    },
+  })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 201
+{
+    &quot;status&quot;: 201,
+    &quot;user&quot;: {
+        &quot;_id&quot;: &quot;***&quot;,
+        &quot;username&quot;: &quot;***&quot;,
+        &quot;name&quot;: &quot;***&quot;,
+        &quot;pc&quot;: &quot;***&quot;
+    }
 }</code></pre>
     <h2 id="delete-apiuserparams"><code>DELETE /api/user{params}</code></h2>
     <blockquote>
@@ -543,12 +607,27 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response-3"><strong>Example response</strong></h3>
-    <blockquote>
-      <p><code>DELETE .../api/user?id=1</code></p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example-3"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  _id: { value },
+});
+axios
+  .delete(apiURL + &quot;/user&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    },
+  })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 410
+{
+    &quot;status&quot;: 410
 }</code></pre>
     <h2 id="get-apiuserparams"><code>GET /api/user{params}</code></h2>
     <blockquote>
@@ -575,12 +654,29 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response-4"><strong>Example response</strong></h3>
-    <blockquote>
-      <p><code>GET .../api/user?id=1</code></p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example-4"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  _id: { value },
+});
+axios
+  .get(apiURL + &quot;/user&quot;)
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 200
+{
+    &quot;status&quot;: 201,
+    &quot;user&quot;: {
+        &quot;_id&quot;: &quot;***&quot;,
+        &quot;username&quot;: &quot;***&quot;,
+        &quot;name&quot;: &quot;***&quot;,
+        &quot;pc&quot;: &quot;***&quot;
+    }
 }</code></pre>
     <h2 id="post-apiuserauthparams">
       <code>POST /api/user/auth{params}</code>
@@ -616,7 +712,7 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response-5"><strong>Example response</strong></h3>
+    <h3 id="example-response"><strong>Example response</strong></h3>
     <blockquote>
       <p>
         <code>POST .../api/user?username=TestUser&amp;password=**********</code>

@@ -118,7 +118,7 @@ exports.deleteUser = function (data) {
 };
 
 exports.getUser = function (data) {
-  return Users.findById(date._id)
+  return Users.findById(data._id)
     .then((doc) => {
       return {
         status: 201,
