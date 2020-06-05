@@ -4,10 +4,10 @@
 
 > Author:
 
-| Base name | URL                                       |
-| --------- | ----------------------------------------- |
-| API       | `https://global-buddy.herokuapp.com/api`  |
-| Docs      | `https://global-buddy.herokuapp.com/docs` |
+| Base name | URL                                         |
+| --------- | ------------------------------------------- |
+| API       | `https://local-buddy-sm.herokuapp.com/api`  |
+| Docs      | `https://local-buddy-sm.herokuapp.com/docs` |
 
 ## API Sections
 
