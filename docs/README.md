@@ -100,3 +100,4 @@ fetch("apiURL" + "/{requestName}", {
   - Modified JS examples
 - Modified user API
   - Modified user Schemas
+- Added TokenManager Authorization
