@@ -26,6 +26,7 @@
     "marked": "^1.1.0",
     "mongoose": "^5.9.16",
     "onchange": "^7.0.2",
+    "token-manager-express": "^1.0.8",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

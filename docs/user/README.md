@@ -11,12 +11,14 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description           | Format   |
-| -------- | ----------- | ------- | --------------------- | -------- |
-| x        | `username`  | -       | Username of a user    | `string` |
-| x        | `password`  | -       | Password of a user    | `string` |
-| x        | `name`      | -       | Name of a user        | `string` |
-|          | `pc`        | -       | Postal Code of a user | `nnnnss` |
+| Required | Paramenters   | Default | Description           | Format   |
+| -------- | ------------- | ------- | --------------------- | -------- |
+| x        | `username`    | -       | Username of a user    | `string` |
+| x        | `password`    | -       | Password of a user    | `string` |
+| x        | `firstname`   | -       | Firstname of a user   | `string` |
+| x        | `lastname`    | -       | Lastname of a user    | `string` |
+|          | `nationality` | -       | Nationality of a user | `string` |
+|          | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
 ### **Example**
 
@@ -50,8 +52,10 @@ STATUS 201
     "user": {
         "_id": "***",
         "username": "***",
-        "name": "***",
-        "pc": "***"
+        "firstname": "***",
+        "lastname": "***",
+        "nationality": "***",
+        "pc": "***",
     }
 }
 ```
@@ -72,7 +76,9 @@ STATUS 201
 let data = JSON.stringify({
   username: { value },
   password: { value },
-  name: { value },
+  firstname: { value },
+  lastname: { value },
+  nationality: { value },
   pc: { value },
 });
 axios
@@ -90,34 +96,38 @@ RESPONSE
 
 STATUS 200
 {
-    "status": 200,
-    "users": [
-      {
-        "_id": "***",
-        "username": "***",
-        "name": "***",
-        "pc": "***"
-      },
-      {
-        ...
-      }
-    ]
+  "status": 200,
+  "users": [
+    {
+      "_id": "***",
+      "username": "***",
+      "firstname": "***",
+      "lastname": "***",
+      "nationality": "***",
+      "pc": "***",
+    },
+    {
+      ...
+    }
+  ]
 }
 ```
 
 ## `PUT /api/user{params}`
 
-> Description: Update a user
+> Description: Update a user `[Needs Auth]`
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description           | Format   |
-| -------- | ----------- | ------- | --------------------- | -------- |
-| x        | `id`        | -       | ID of a user          | `int`    |
-|          | `username`  | -       | Username of a user    | `string` |
-|          | `password`  | -       | Password of a user    | `string` |
-|          | `name`      | -       | Name of a user        | `string` |
-|          | `pc`        | -       | Postal Code of a user | `nnnnss` |
+| Required | Paramenters   | Default | Description           | Format   |
+| -------- | ------------- | ------- | --------------------- | -------- |
+| x        | `id`          | -       | ID of a user          | `int`    |
+|          | `username`    | -       | Username of a user    | `string` |
+|          | `password`    | -       | Password of a user    | `string` |
+|          | `firstname`   | -       | Firstname of a user   | `string` |
+|          | `lastname`    | -       | Lastname of a user    | `string` |
+|          | `nationality` | -       | Nationality of a user | `string` |
+|          | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
 ### **Example**
 
@@ -126,13 +136,16 @@ let data = JSON.stringify({
   _id: { value },
   username: { value },
   password: { value },
-  name: { value },
+  firstname: { value },
+  lastname: { value },
+  nationality: { value },
   pc: { value },
 });
 axios
   .put(apiURL + "/user", data, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) => {
@@ -148,19 +161,22 @@ RESPONSE
 
 STATUS 201
 {
-    "status": 201,
-    "user": {
-        "_id": "***",
-        "username": "***",
-        "name": "***",
-        "pc": "***"
-    }
+  "status": 201,
+  "user": {
+    "_id": "***",
+    "username": "***",
+    "firstname": "***",
+    "lastname": "***",
+    "nationality": "***",
+    "pc": "***",
+  },
+  "token": "..."
 }
 ```
 
 ## `DELETE /api/user{params}`
 
-> Description: Delete a user
+> Description: Delete a user `[Needs Auth]`
 
 ### **Query Parameters**
 
@@ -178,6 +194,7 @@ axios
   .delete(apiURL + "/user", data, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) => {
@@ -214,7 +231,11 @@ let data = JSON.stringify({
   _id: { value },
 });
 axios
-  .get(apiURL + "/user")
+  .get(apiURL + "/user", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
   .then((response) => {
     // Your code
   })
@@ -226,15 +247,17 @@ axios
 ```json
 RESPONSE
 
-STATUS 200
+STATUS 201
 {
-    "status": 201,
-    "user": {
-        "_id": "***",
-        "username": "***",
-        "name": "***",
-        "pc": "***"
-    }
+  "status": 201,
+  "user": {
+    "_id": "***",
+    "username": "***",
+    "firstname": "***",
+    "lastname": "***",
+    "nationality": "***",
+    "pc": "***",
+  }
 }
 ```
 
@@ -249,12 +272,33 @@ STATUS 200
 | x        | `username`  | -       | Username of a user | `string` |
 | x        | `password`  | -       | Password of a user | `string` |
 
-### **Example response**
+### **Example**
 
-> `POST .../api/user?username=TestUser&password=**********`
+```js
+let data = JSON.stringify({
+  username: { value },
+  password: { value },
+});
+axios
+  .post(apiURL + "/user/auth", data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
 
 ```json
+RESPONSE
+
+STATUS 200
 {
-  "status": null
+  "status": 200,
+  "token": "..."
 }
 ```

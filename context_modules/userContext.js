@@ -1,12 +1,8 @@
-/*
-  TODO: POST
-    POST: 
-      - Authenticate user 
-*/
-
 // Package Dependency Injection
+const tokenManager = require("token-manager-express");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const crypto = require("crypto");
 
 // Local Module Dependency Injection
 
@@ -15,7 +11,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  name: String,
+  firstname: String,
+  lastname: String,
+  nationality: String,
   pc: String,
 });
 
@@ -32,24 +30,42 @@ function responseUser(user) {
   return {
     _id: user._id,
     username: user.username,
-    name: user.name,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    nationality: user.nationality,
     pc: user.pc,
   };
 }
 
 function updateUser(user) {
   return {
+    _id: user._id,
     username: user.username,
-    name: user.name,
     password: user.password,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    nationality: user.nationality,
     pc: user.pc,
   };
+}
+
+function generateToken(_id) {
+  return tokenManager.generate({
+    expireAfterSeconds: false,
+    size: 64,
+    data: {
+      _id: _id,
+    },
+  });
 }
 
 exports.createUser = function (data) {
   let user = new Users({
     ...data,
   });
+  var hash = crypto.createHash("sha256");
+  var pass = hash.update(user.password, "utf8", "hex");
+  user.password = pass.digest("hex");
   return user
     .save()
     .then((doc) => {
@@ -87,11 +103,16 @@ exports.getAllUser = function () {
 };
 
 exports.updateUser = function (data) {
+  var hash = crypto.createHash("sha256");
+  var pass = hash.update(data.password, "utf8", "hex");
+  data.password = pass.digest("hex");
   return Users.findByIdAndUpdate(data._id, updateUser(data))
     .then((doc) => {
+      var result = generateToken(doc._id);
       return {
         status: 201,
-        user: responseUser(doc),
+        user: responseUser(data),
+        token: result.secret,
       };
     })
     .catch((err) => {
@@ -133,6 +154,39 @@ exports.getUser = function (data) {
     });
 };
 
-exports.authUser = function () {
-  return defaultResponse;
+exports.authUser = function (data) {
+  var query = Users.where({ username: data.username });
+  return query
+    .findOne()
+    .then((doc) => {
+      var hash = crypto.createHash("sha256");
+      var pass = hash.update(data.password, "utf8", "hex");
+      data.password = pass.digest("hex");
+      if (doc.password === data.password) {
+        var result = generateToken(doc._id);
+        return {
+          status: 200,
+          token: result.secret,
+        };
+      } else {
+        return {
+          status: 401,
+        };
+      }
+    })
+    .catch(() => {
+      return {
+        status: 401,
+      };
+    });
+};
+
+exports.userExist = function (data) {
+  Users.countDocuments({ username: data.username }, function (err, count) {
+    if (count > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 };

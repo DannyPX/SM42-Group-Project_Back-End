@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const bodyParser = require("body-parser");
+const tokenManager = require("token-manager-express");
 
 // ENV initialize
 require("dotenv").config();
@@ -35,6 +36,7 @@ app.use(
     extended: true,
   })
 );
+app.use(tokenManager.init());
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 
 // Send Docs file
@@ -68,6 +70,13 @@ app.get("/api", function (req, res) {
 
 /// User
 app.post("/api/user", async function (req, res) {
+  if (userContext.userExist(req.body)) {
+    res.status(409);
+    res.json({
+      status: 409,
+      err: "Username already exists",
+    });
+  }
   var response = await userContext.createUser(req.body);
   res.status(response.status);
   res.json(response);
@@ -87,19 +96,38 @@ app.get("/api/user", async function (req, res) {
   }
 });
 
-app.put("/api/user", async function (req, res) {
-  var response = await userContext.updateUser(req.body);
+app.put(
+  "/api/user",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    var response = await userContext.updateUser(req.body);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
+app.delete(
+  "/api/user",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    var response = await userContext.deleteUser(req.body);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
+app.post("/api/user/auth", async function (req, res) {
+  var response = await userContext.authUser(req.body);
   res.status(response.status);
   res.json(response);
-});
-
-app.delete("/api/user", async function (req, res) {
-  var response = await userContext.deleteUser(req.body);
-  res.status(response.status);
-  res.json(response);
-});
-
-app.post("/api/user/auth", function (req, res) {
-  res.status(501);
-  res.json(userContext.authUser());
 });

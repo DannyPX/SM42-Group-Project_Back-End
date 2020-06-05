@@ -94,3 +94,9 @@ fetch("apiURL" + "/{requestName}", {
 
 - Connect MongoDB
 - Body request handlers instead of query
+- Modified user docs `.V2`
+  - Modified parameters
+  - Modified examples responses
+  - Modified JS examples
+- Modified user API
+  - Modified user Schemas

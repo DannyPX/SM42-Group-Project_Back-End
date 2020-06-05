@@ -404,9 +404,23 @@
         </tr>
         <tr>
           <td>x</td>
-          <td><code>name</code></td>
+          <td><code>firstname</code></td>
           <td>-</td>
-          <td>Name of a user</td>
+          <td>Firstname of a user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>lastname</code></td>
+          <td>-</td>
+          <td>Lastname of a user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code>nationality</code></td>
+          <td>-</td>
+          <td>Nationality of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
@@ -445,8 +459,10 @@ STATUS 201
     &quot;user&quot;: {
         &quot;_id&quot;: &quot;***&quot;,
         &quot;username&quot;: &quot;***&quot;,
-        &quot;name&quot;: &quot;***&quot;,
-        &quot;pc&quot;: &quot;***&quot;
+        &quot;firstname&quot;: &quot;***&quot;,
+        &quot;lastname&quot;: &quot;***&quot;,
+        &quot;nationality&quot;: &quot;***&quot;,
+        &quot;pc&quot;: &quot;***&quot;,
     }
 }</code></pre>
     <h2 id="get-apiuser"><code>GET /api/user</code></h2>
@@ -469,7 +485,9 @@ STATUS 201
     <pre><code class="language-js">let data = JSON.stringify({
   username: { value },
   password: { value },
-  name: { value },
+  firstname: { value },
+  lastname: { value },
+  nationality: { value },
   pc: { value },
 });
 axios
@@ -484,22 +502,24 @@ axios
 
 STATUS 200
 {
-    &quot;status&quot;: 200,
-    &quot;users&quot;: [
-      {
-        &quot;_id&quot;: &quot;***&quot;,
-        &quot;username&quot;: &quot;***&quot;,
-        &quot;name&quot;: &quot;***&quot;,
-        &quot;pc&quot;: &quot;***&quot;
-      },
-      {
-        ...
-      }
-    ]
+  &quot;status&quot;: 200,
+  &quot;users&quot;: [
+    {
+      &quot;_id&quot;: &quot;***&quot;,
+      &quot;username&quot;: &quot;***&quot;,
+      &quot;firstname&quot;: &quot;***&quot;,
+      &quot;lastname&quot;: &quot;***&quot;,
+      &quot;nationality&quot;: &quot;***&quot;,
+      &quot;pc&quot;: &quot;***&quot;,
+    },
+    {
+      ...
+    }
+  ]
 }</code></pre>
     <h2 id="put-apiuserparams"><code>PUT /api/user{params}</code></h2>
     <blockquote>
-      <p>Description: Update a user</p>
+      <p>Description: Update a user <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-2"><strong>Query Parameters</strong></h3>
     <table>
@@ -536,9 +556,23 @@ STATUS 200
         </tr>
         <tr>
           <td></td>
-          <td><code>name</code></td>
+          <td><code>firstname</code></td>
           <td>-</td>
-          <td>Name of a user</td>
+          <td>Firstname of a user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code>lastname</code></td>
+          <td>-</td>
+          <td>Lastname of a user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><code>nationality</code></td>
+          <td>-</td>
+          <td>Nationality of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
@@ -555,13 +589,16 @@ STATUS 200
   _id: { value },
   username: { value },
   password: { value },
-  name: { value },
+  firstname: { value },
+  lastname: { value },
+  nationality: { value },
   pc: { value },
 });
 axios
   .put(apiURL + &quot;/user&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) =&gt; {
@@ -574,17 +611,20 @@ axios
 
 STATUS 201
 {
-    &quot;status&quot;: 201,
-    &quot;user&quot;: {
-        &quot;_id&quot;: &quot;***&quot;,
-        &quot;username&quot;: &quot;***&quot;,
-        &quot;name&quot;: &quot;***&quot;,
-        &quot;pc&quot;: &quot;***&quot;
-    }
+  &quot;status&quot;: 201,
+  &quot;user&quot;: {
+    &quot;_id&quot;: &quot;***&quot;,
+    &quot;username&quot;: &quot;***&quot;,
+    &quot;firstname&quot;: &quot;***&quot;,
+    &quot;lastname&quot;: &quot;***&quot;,
+    &quot;nationality&quot;: &quot;***&quot;,
+    &quot;pc&quot;: &quot;***&quot;,
+  },
+  &quot;token&quot;: &quot;...&quot;
 }</code></pre>
     <h2 id="delete-apiuserparams"><code>DELETE /api/user{params}</code></h2>
     <blockquote>
-      <p>Description: Delete a user</p>
+      <p>Description: Delete a user <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-3"><strong>Query Parameters</strong></h3>
     <table>
@@ -615,6 +655,7 @@ axios
   .delete(apiURL + &quot;/user&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) =&gt; {
@@ -659,7 +700,11 @@ STATUS 410
   _id: { value },
 });
 axios
-  .get(apiURL + &quot;/user&quot;)
+  .get(apiURL + &quot;/user&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    },
+  })
   .then((response) =&gt; {
     // Your code
   })
@@ -668,15 +713,17 @@ axios
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 200
+STATUS 201
 {
-    &quot;status&quot;: 201,
-    &quot;user&quot;: {
-        &quot;_id&quot;: &quot;***&quot;,
-        &quot;username&quot;: &quot;***&quot;,
-        &quot;name&quot;: &quot;***&quot;,
-        &quot;pc&quot;: &quot;***&quot;
-    }
+  &quot;status&quot;: 201,
+  &quot;user&quot;: {
+    &quot;_id&quot;: &quot;***&quot;,
+    &quot;username&quot;: &quot;***&quot;,
+    &quot;firstname&quot;: &quot;***&quot;,
+    &quot;lastname&quot;: &quot;***&quot;,
+    &quot;nationality&quot;: &quot;***&quot;,
+    &quot;pc&quot;: &quot;***&quot;,
+  }
 }</code></pre>
     <h2 id="post-apiuserauthparams">
       <code>POST /api/user/auth{params}</code>
@@ -712,14 +759,29 @@ STATUS 200
         </tr>
       </tbody>
     </table>
-    <h3 id="example-response"><strong>Example response</strong></h3>
-    <blockquote>
-      <p>
-        <code>POST .../api/user?username=TestUser&amp;password=**********</code>
-      </p>
-    </blockquote>
-    <pre><code class="language-json">{
-  &quot;status&quot;: null
+    <h3 id="example-5"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = JSON.stringify({
+  username: { value },
+  password: { value },
+});
+axios
+  .post(apiURL + &quot;/user/auth&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+    },
+  })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 200
+{
+  &quot;status&quot;: 200,
+  &quot;token&quot;: &quot;...&quot;
 }</code></pre>
   </body>
 </html>
