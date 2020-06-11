@@ -20,7 +20,7 @@
 |          | `bio`         | -       | Bio of the user            | `string`              |
 | x        | `title`       | -       | Title of the card          | `string`              |
 | x        | `text`        | -       | Description of the problem | `string`              |
-| x        | `type`        | -       | Type of the problem        | `"task" | "question"` |
+| x        | `type`        | -       | Type of the problem        | `"task" - "question"` |
 
 ### **Example**
 
@@ -134,7 +134,7 @@ STATUS 200
 | x        | `bio`         | -       | Bio of the user            | `string`              |
 | x        | `title`       | -       | Title of the card          | `string`              |
 | x        | `text`        | -       | Description of the problem | `string`              |
-| x        | `type`        | -       | Type of the problem        | `"task" | "question"` |
+| x        | `type`        | -       | Type of the problem        | `"task" - "question"` |
 
 ### **Example**
 
@@ -272,5 +272,218 @@ STATUS 201
       "text": "***",
       "type": "***",
     }
+}
+```
+
+## `GET /api/buddy/card/own`
+
+> Description: Get own cards
+
+### **Query Parameters**
+
+| Required | Paramenters | Default | Description | Format |
+| -------- | ----------- | ------- | ----------- | ------ |
+
+
+### **Example**
+
+```js
+axios
+  .get(apiURL + "/buddy/card/own", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
+
+```json
+RESPONSE
+
+STATUS 200
+{
+  "status": 200,
+  "cards": [
+    {
+      "_id": "***",
+      "_sender": "***",
+      "firstname": "***",
+      "lastname": "***",
+      "nationality": "***",
+      "bio": "***",
+      "title": "***",
+      "text": "***",
+      "type": "***",
+    },
+    {
+      ...
+    }
+  ]
+}
+```
+
+## `GET /api/buddy/card/other`
+
+> Description: Get other cards
+
+### **Query Parameters**
+
+| Required | Paramenters | Default | Description | Format |
+| -------- | ----------- | ------- | ----------- | ------ |
+
+
+### **Example**
+
+```js
+axios
+  .get(apiURL + "/buddy/card/other", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
+
+```json
+RESPONSE
+
+STATUS 200
+{
+  "status": 200,
+  "cards": [
+    {
+      "_id": "***",
+      "_sender": "***",
+      "firstname": "***",
+      "lastname": "***",
+      "nationality": "***",
+      "bio": "***",
+      "title": "***",
+      "text": "***",
+      "type": "***",
+    },
+    {
+      ...
+    }
+  ]
+}
+```
+
+## `GET /api/buddy/card/accept`
+
+> Description: Accept card
+
+### **Query Parameters**
+
+| Required | Paramenters | Default | Description        | Format   |
+| -------- | ----------- | ------- | ------------------ | -------- |
+| x        | `_id`       | -       | ID of the card     | `string` |
+| x        | `_acceptor` | -       | ID of the acceptor | `string` |
+
+### **Example**
+
+```js
+let data = JSON.stringify({
+  _id: { value },
+  _acceptor: { value },
+});
+axios
+  .put(apiURL + "/buddy/card/accept", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
+
+```json
+RESPONSE
+
+STATUS 200
+{
+  "status": 200,
+  "cards": [
+    {
+      "_id": "***",
+      "_sender": "***",
+      "firstname": "***",
+      "lastname": "***",
+      "nationality": "***",
+      "bio": "***",
+      "title": "***",
+      "text": "***",
+      "type": "***",
+    },
+    {
+      ...
+    }
+  ]
+}
+```
+
+## `GET /api/buddy/card/accepted`
+
+> Description: Get accepted cards
+
+### **Query Parameters**
+
+| Required | Paramenters | Default | Description | Format |
+| -------- | ----------- | ------- | ----------- | ------ |
+
+
+### **Example**
+
+```js
+axios
+  .get(apiURL + "/buddy/card/other", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
+
+```json
+RESPONSE
+
+STATUS 200
+{
+  "status": 200,
+  "cards": [
+    {
+      "_id": "***",
+      "_sender": "***",
+      "firstname": "***",
+      "lastname": "***",
+      "nationality": "***",
+      "bio": "***",
+      "title": "***",
+      "text": "***",
+      "type": "***",
+    },
+    {
+      ...
+    }
+  ]
 }
 ```

@@ -1,6 +1,5 @@
 // Package Dependency Injection
 const mongoose = require("mongoose");
-const { userExist } = require("./userContext");
 const Schema = mongoose.Schema;
 
 // Local Module Dependency Injection
@@ -8,7 +7,7 @@ const Schema = mongoose.Schema;
 /* Node.js module: nbContext */
 // Mongoose schema
 const cardSchema = new Schema({
-  _sender: Number,
+  _sender: String,
   firstname: String,
   lastname: String,
   nationality: String,
@@ -16,21 +15,17 @@ const cardSchema = new Schema({
   title: String,
   text: String,
   type: String, // Type of card, e.g. Task, Question
+  _acceptor: String,
 });
 
 // Mongoose card init
 const Cards = mongoose.model("Card", cardSchema);
 
-const defaultResponse = [
-  {
-    status: null,
-  },
-];
-
 function responseCard(card) {
   return {
     _id: card._id,
     _sender: card._sender,
+    _acceptor: card._acceptor,
     firstname: card.firstname,
     lastname: card.lastname,
     nationality: card.nationality,
@@ -43,7 +38,7 @@ function responseCard(card) {
 
 function updateCard(card) {
   return {
-    _id: card_id,
+    _id: card._id,
     _sender: card._sender,
     firstname: card.firstname,
     lastname: card.lastname,
@@ -100,7 +95,7 @@ exports.updateCard = function (data) {
     .then((doc) => {
       return {
         status: 201,
-        user: responseCard(data),
+        card: responseCard(data),
       };
     })
     .catch((err) => {
@@ -131,7 +126,87 @@ exports.getCard = function (data) {
     .then((doc) => {
       return {
         status: 201,
-        user: responseCard(doc),
+        card: responseCard(doc),
+      };
+    })
+    .catch((err) => {
+      return {
+        status: 400,
+        error: err,
+      };
+    });
+};
+
+exports.getOwnCards = function (_id) {
+  return Cards.find({ _sender: _id })
+    .then((doc) => {
+      var cards = [];
+      doc.forEach(function (element, index) {
+        cards.push(responseCard(element));
+      });
+      return {
+        status: 200,
+        cards: cards,
+      };
+    })
+    .catch((err) => {
+      return {
+        status: 400,
+        error: err,
+      };
+    });
+};
+
+exports.getAllbutOwn = function (_id) {
+  return Cards.find()
+    .then((doc) => {
+      var cards = [];
+      doc.forEach(function (element, index) {
+        if (element._sender != _id) {
+          cards.push(responseCard(element));
+        }
+      });
+      return {
+        status: 200,
+        cards: cards,
+      };
+    })
+    .catch((err) => {
+      return {
+        status: 400,
+        error: err,
+      };
+    });
+};
+
+exports.acceptCard = function (data) {
+  return Cards.findByIdAndUpdate(data._id, {
+    _acceptor: data._acceptor,
+  })
+    .then((doc) => {
+      return {
+        status: 201,
+        card: responseCard(doc),
+      };
+    })
+    .catch((err) => {
+      return {
+        status: 400,
+        error: err,
+      };
+    });
+};
+
+exports.getOwnAcceptedCards = function (_id) {
+  return Cards.find({ _acceptor: _id })
+    .then((doc) => {
+      var cards = [];
+      doc.forEach(function (element, index) {
+        cards.push(responseCard(element));
+      });
+      return {
+        status: 200,
+        cards: cards,
       };
     })
     .catch((err) => {

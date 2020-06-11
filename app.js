@@ -76,16 +76,28 @@ app.get("/api", function (req, res) {
 
 /* #region  USER_API */
 app.post("/api/user", async function (req, res) {
-  if (userContext.userExist(req.body)) {
-    res.status(409);
+  if (
+    typeof req.body.username == "undefined" ||
+    typeof req.body.password == "undefined" ||
+    typeof req.body.firstname == "undefined" ||
+    typeof req.body.lastname == "undefined"
+  ) {
+    res.status(400);
     res.json({
-      status: 409,
-      err: "Username already exists",
+      error: "Not all required fields are filled in",
     });
   } else {
-    var response = await userContext.createUser(req.body);
-    res.status(response.status);
-    res.json(response);
+    if ((await userContext.userExist(req.body)) > 0) {
+      res.status(409);
+      res.json({
+        status: 409,
+        err: "Username already exists",
+      });
+    } else {
+      var response = await userContext.createUser(req.body);
+      res.status(response.status);
+      res.json(response);
+    }
   }
 });
 
@@ -112,7 +124,6 @@ app.put(
     });
   }),
   async function (req, res) {
-    console.log(typeof req.body.lastname);
     if (
       typeof req.body.username == "undefined" ||
       typeof req.body.password == "undefined" ||
@@ -165,16 +176,36 @@ app.post(
     });
   }),
   async function (req, res) {
-    var response = await buddyContext.createCard(req.body);
-    res.status(response.status);
-    res.json(response);
+    if (
+      typeof req.body._sender == "undefined" ||
+      typeof req.body.firstname == "undefined" ||
+      typeof req.body.lastname == "undefined" ||
+      typeof req.body.title == "undefined" ||
+      typeof req.body.text == "undefined" ||
+      typeof req.body.text == "undefined" ||
+      typeof req.body.type == "undefined"
+    ) {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else if (req.body.type == "task" || req.body.type == "question") {
+      var response = await buddyContext.createCard(req.body);
+      res.status(response.status);
+      res.json(response);
+    } else {
+      res.status(400);
+      res.json({
+        error: "Type is not correct",
+      });
+    }
   }
 );
 
 app.get("/api/buddy/card", async function (req, res) {
   if (Object.keys(req.body).length === 0) {
     // Get all cards
-    var response = await buddyContext.getAllCards;
+    var response = await buddyContext.getAllCards();
     res.status(response.status);
     res.json(response);
   } else {
@@ -197,6 +228,7 @@ app.put(
     const { token } = req;
     if (token.data._id == req.body._sender) {
       if (
+        typeof req.body._id == "undefined" ||
         typeof req.body._sender == "undefined" ||
         typeof req.body.firstname == "undefined" ||
         typeof req.body.lastname == "undefined" ||
@@ -225,7 +257,47 @@ app.put(
 );
 
 app.delete(
-  "/api/buddy",
+  "/api/buddy/card",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (
+      typeof req.body._id == "undefined" ||
+      typeof req.body._sender == "undefined" ||
+      typeof req.body.firstname == "undefined" ||
+      typeof req.body.lastname == "undefined" ||
+      typeof req.body.nationality == "undefined" ||
+      typeof req.body.bio == "undefined" ||
+      typeof req.body.title == "undefined" ||
+      typeof req.body.text == "undefined" ||
+      typeof req.body.type == "undefined"
+    ) {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      const { token } = req;
+      if (token.data._id == req.body._sender) {
+        var response = await buddyContext.deleteCard(req.body);
+        res.status(response.status);
+        res.json(response);
+      } else {
+        res.status(400);
+        res.json({
+          error: "This is not your card",
+        });
+      }
+    }
+  }
+);
+
+app.get(
+  "/api/buddy/card/own",
   tokenManager.ensureValidToken((req, res) => {
     res.status(401);
     res.json({
@@ -234,16 +306,67 @@ app.delete(
   }),
   async function (req, res) {
     const { token } = req;
-    if (token.data._id == req.body._sender) {
-      var response = await buddyContext.deleteCard(req.body);
-      res.status(response.status);
-      res.json(response);
-    } else {
+    var response = await buddyContext.getOwnCards(token.data._id);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
+app.get(
+  "/api/buddy/card/other",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    const { token } = req;
+    var response = await buddyContext.getAllbutOwn(token.data._id);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
+app.put(
+  "/api/buddy/card/accept",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (
+      typeof req.body._id == "undefined" ||
+      typeof req.body._acceptor == "undefined"
+    ) {
       res.status(400);
       res.json({
-        error: "This is not your card",
+        error: "Not all required fields are filled in",
       });
+    } else {
+      const { token } = req;
+      var response = await buddyContext.acceptCard(req.body);
+      res.status(response.status);
+      res.json(response);
     }
+  }
+);
+
+app.get(
+  "/api/buddy/card/accepted",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    const { token } = req;
+    var response = await buddyContext.getOwnAcceptedCards(token.data._id);
+    res.status(response.status);
+    res.json(response);
   }
 );
 /* #endregion */

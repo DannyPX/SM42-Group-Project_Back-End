@@ -20,12 +20,6 @@ const userSchema = new Schema({
 // Mongoose user init
 const Users = mongoose.model("User", userSchema);
 
-const defaultResponse = [
-  {
-    status: null,
-  },
-];
-
 function responseUser(user) {
   return {
     _id: user._id,
@@ -182,11 +176,7 @@ exports.authUser = function (data) {
 };
 
 exports.userExist = function (data) {
-  Users.countDocuments({ username: data.username }, function (err, count) {
-    if (count > 0) {
-      return true;
-    } else {
-      return false;
-    }
+  return Users.countDocuments({ username: data.username }).then((count) => {
+    return count > 0 ? true : false;
   });
 };

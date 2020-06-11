@@ -42,7 +42,7 @@
 | `GET /api/buddy/card`           | Get all cards                                             |
 | `PUT /api/buddy/card`           | Update a card                                             |
 | `DELETE /api/buddy/card`        | Delete a card                                             |
-| `GET /api/buddy/card/newcomer`  | Get one card                                              |
+| `GET /api/buddy/card`           | Get one card                                              |
 | `POST /api/buddy/card/newcomer` | Accept and assign user that accepted the card to the card |
 | `GET /api/buddy/chat`           | ???                                                       |
 | `POST /api/buddy/chat`          | ???                                                       |

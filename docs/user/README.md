@@ -214,7 +214,7 @@ STATUS 410
 
 | Required | Paramenters | Default | Description  | Format |
 | -------- | ----------- | ------- | ------------ | ------ |
-| x        | `id`        | -       | ID of a user | `int`  |
+| x        | `_id`       | -       | ID of a user | `int`  |
 
 ### **Example**
 
