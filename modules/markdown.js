@@ -1,7 +1,7 @@
 const marked = require("marked");
 const fs = require("fs");
 
-const docList = ["./docs/", "./docs/user/"];
+const docList = ["./docs/", "./docs/user/", "./docs/buddy/"];
 
 exports.init = function () {
   docList.forEach((url) => {

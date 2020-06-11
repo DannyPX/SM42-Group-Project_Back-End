@@ -370,11 +370,11 @@
       <tbody>
         <tr>
           <td>API</td>
-          <td><code>https://global-buddy.herokuapp.com/api</code></td>
+          <td><code>https://local-buddy-sm.herokuapp.com/api</code></td>
         </tr>
         <tr>
           <td>Docs</td>
-          <td><code>https://global-buddy.herokuapp.com/docs</code></td>
+          <td><code>https://local-buddy-sm.herokuapp.com/docs</code></td>
         </tr>
       </tbody>
     </table>
@@ -411,7 +411,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><code>POST /api/user{params}</code></td>
+          <td><code>POST /api/user</code></td>
           <td>Create a user</td>
         </tr>
         <tr>
@@ -423,16 +423,81 @@
           <td>Update a user</td>
         </tr>
         <tr>
-          <td><code>DELETE /api/user{params}</code></td>
+          <td><code>DELETE /api/user</code></td>
           <td>Delete a user</td>
         </tr>
         <tr>
-          <td><code>GET /api/user{params}</code></td>
+          <td><code>GET /api/user</code></td>
           <td>Get one user</td>
         </tr>
         <tr>
-          <td><code>POST /api/user/auth{params}</code></td>
+          <td><code>POST /api/user/auth</code></td>
           <td>Authenticate a user</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="buddy">Buddy</h3>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base</td>
+          <td><code>/api/buddy</code></td>
+        </tr>
+        <tr>
+          <td>Version</td>
+          <td><code>.V1</code></td>
+        </tr>
+        <tr>
+          <td>Docs</td>
+          <td><code>/docs/buddy</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>POST /api/buddy/card</code></td>
+          <td>Create a card</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/buddy/card</code></td>
+          <td>Get all cards</td>
+        </tr>
+        <tr>
+          <td><code>PUT /api/buddy/card</code></td>
+          <td>Update a card</td>
+        </tr>
+        <tr>
+          <td><code>DELETE /api/buddy/card</code></td>
+          <td>Delete a card</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/buddy/card/newcomer</code></td>
+          <td>Get one card</td>
+        </tr>
+        <tr>
+          <td><code>POST /api/buddy/card/newcomer</code></td>
+          <td>Accept and assign user that accepted the card to the card</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/buddy/chat</code></td>
+          <td>???</td>
+        </tr>
+        <tr>
+          <td><code>POST /api/buddy/chat</code></td>
+          <td>???</td>
         </tr>
       </tbody>
     </table>
@@ -522,6 +587,12 @@ axios
           <li>Modified user Schemas</li>
         </ul>
       </li>
+      <li>Added TokenManager Authorization</li>
+    </ul>
+    <h3 id="v03-wip"><code>V0.3</code> WIP</h3>
+    <h4 id="changelog-2">Changelog</h4>
+    <ul>
+      <li>Card Implementation</li>
     </ul>
   </body>
 </html>

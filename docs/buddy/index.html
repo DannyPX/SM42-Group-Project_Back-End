@@ -353,7 +353,7 @@
     </style>
   </head>
   <body>
-    <h2 id="user-api">User API</h2>
+    <h2 id="buddy-api">Buddy API</h2>
     <table>
       <thead>
         <tr>
@@ -364,17 +364,17 @@
       <tbody>
         <tr>
           <td>Base</td>
-          <td><code>/api/user</code></td>
+          <td><code>/api/buddy</code></td>
         </tr>
         <tr>
           <td>Version</td>
-          <td><code>.V2</code></td>
+          <td><code>.V1</code></td>
         </tr>
       </tbody>
     </table>
-    <h2 id="post-apiuser"><code>POST /api/user</code></h2>
+    <h2 id="post-apibuddycard"><code>POST /api/buddy/card</code></h2>
     <blockquote>
-      <p>Description: Create a user</p>
+      <p>Description: Create a card <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters"><strong>Query Parameters</strong></h3>
     <table>
@@ -390,59 +390,78 @@
       <tbody>
         <tr>
           <td>x</td>
-          <td><code>username</code></td>
+          <td><code>_sender</code></td>
           <td>-</td>
-          <td>Username of a user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>password</code></td>
-          <td>-</td>
-          <td>Password of a user</td>
+          <td>User ID of the creator</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
           <td><code>firstname</code></td>
           <td>-</td>
-          <td>Firstname of a user</td>
+          <td>Firstname of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
           <td><code>lastname</code></td>
           <td>-</td>
-          <td>Lastname of a user</td>
+          <td>Lastname of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td></td>
           <td><code>nationality</code></td>
           <td>-</td>
-          <td>Nationality of a user</td>
+          <td>Nationality of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td></td>
-          <td><code>pc</code></td>
+          <td><code>bio</code></td>
           <td>-</td>
-          <td>Postal Code of a user</td>
-          <td><code>nnnnss</code></td>
+          <td>Bio of the user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>title</code></td>
+          <td>-</td>
+          <td>Title of the card</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>text</code></td>
+          <td>-</td>
+          <td>Description of the problem</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>type</code></td>
+          <td>-</td>
+          <td>Type of the problem</td>
+          <td>`&quot;task&quot;</td>
         </tr>
       </tbody>
     </table>
     <h3 id="example"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
-  username: { value },
-  password: { value },
-  name: { value },
-  pc: { value },
+  _sender: { value },
+  firstname: { value },
+  lastname: { value },
+  nationality: { value },
+  bio: { value },
+  title: { value },
+  text: { value },
+  type: { value },
 });
 axios
-  .post(apiURL + &quot;/user&quot;, data, {
+  .post(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) =&gt; {
@@ -455,19 +474,22 @@ axios
 
 STATUS 201
 {
-    &quot;status&quot;: 201,
-    &quot;user&quot;: {
-        &quot;_id&quot;: &quot;***&quot;,
-        &quot;username&quot;: &quot;***&quot;,
-        &quot;firstname&quot;: &quot;***&quot;,
-        &quot;lastname&quot;: &quot;***&quot;,
-        &quot;nationality&quot;: &quot;***&quot;,
-        &quot;pc&quot;: &quot;***&quot;,
-    }
+  &quot;status&quot;: 201,
+  &quot;user&quot;: {
+    &quot;_id&quot;: &quot;***&quot;,
+    &quot;_sender&quot;: &quot;***&quot;,
+    &quot;firstname&quot;: &quot;***&quot;,
+    &quot;lastname&quot;: &quot;***&quot;,
+    &quot;nationality&quot;: &quot;***&quot;,
+    &quot;bio&quot;: &quot;***&quot;,
+    &quot;title&quot;: &quot;***&quot;,
+    &quot;text&quot;: &quot;***&quot;,
+    &quot;type&quot;: &quot;***&quot;,
+  }
 }</code></pre>
-    <h2 id="get-apiuser"><code>GET /api/user</code></h2>
+    <h2 id="get-apibuddycard"><code>GET /api/buddy/card</code></h2>
     <blockquote>
-      <p>Description: Get all users</p>
+      <p>Description: Get all cards</p>
     </blockquote>
     <h3 id="query-parameters-1"><strong>Query Parameters</strong></h3>
     <table>
@@ -483,7 +505,7 @@ STATUS 201
     </table>
     <h3 id="example-1"><strong>Example</strong></h3>
     <pre><code class="language-js">axios
-  .get(apiURL + &quot;/user&quot;)
+  .get(apiURL + &quot;/buddy/card&quot;)
   .then((response) =&gt; {
     // Your code
   })
@@ -495,14 +517,17 @@ STATUS 201
 STATUS 200
 {
   &quot;status&quot;: 200,
-  &quot;users&quot;: [
+  &quot;cards&quot;: [
     {
       &quot;_id&quot;: &quot;***&quot;,
-      &quot;username&quot;: &quot;***&quot;,
+      &quot;_sender&quot;: &quot;***&quot;,
       &quot;firstname&quot;: &quot;***&quot;,
       &quot;lastname&quot;: &quot;***&quot;,
       &quot;nationality&quot;: &quot;***&quot;,
-      &quot;pc&quot;: &quot;***&quot;,
+      &quot;bio&quot;: &quot;***&quot;,
+      &quot;title&quot;: &quot;***&quot;,
+      &quot;text&quot;: &quot;***&quot;,
+      &quot;type&quot;: &quot;***&quot;,
     },
     {
       ...
@@ -534,60 +559,76 @@ STATUS 200
         </tr>
         <tr>
           <td>x</td>
-          <td><code>username</code></td>
+          <td><code>_sender</code></td>
           <td>-</td>
-          <td>Username of a user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>password</code></td>
-          <td>-</td>
-          <td>Password of a user</td>
+          <td>User ID of the creator</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
           <td><code>firstname</code></td>
           <td>-</td>
-          <td>Firstname of a user</td>
+          <td>Firstname of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
           <td><code>lastname</code></td>
           <td>-</td>
-          <td>Lastname of a user</td>
+          <td>Lastname of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
           <td><code>nationality</code></td>
           <td>-</td>
-          <td>Nationality of a user</td>
+          <td>Nationality of the user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
-          <td><code>pc</code></td>
+          <td><code>bio</code></td>
           <td>-</td>
-          <td>Postal Code of a user</td>
-          <td><code>nnnnss</code></td>
+          <td>Bio of the user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>title</code></td>
+          <td>-</td>
+          <td>Title of the card</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>text</code></td>
+          <td>-</td>
+          <td>Description of the problem</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>type</code></td>
+          <td>-</td>
+          <td>Type of the problem</td>
+          <td>`&quot;task&quot;</td>
         </tr>
       </tbody>
     </table>
     <h3 id="example-2"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
   _id: { value },
-  username: { value },
-  password: { value },
+  _sender: { value },
   firstname: { value },
   lastname: { value },
   nationality: { value },
-  pc: { value },
+  bio: { value },
+  title: { value },
+  text: { value },
+  type: { value },
 });
 axios
-  .put(apiURL + &quot;/user&quot;, data, {
+  .put(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
       Authorization: `Bearer ${token}`,
@@ -599,179 +640,5 @@ axios
   .catch((error) =&gt; {
     // Error handling
   });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 201
-{
-  &quot;status&quot;: 201,
-  &quot;user&quot;: {
-    &quot;_id&quot;: &quot;***&quot;,
-    &quot;username&quot;: &quot;***&quot;,
-    &quot;firstname&quot;: &quot;***&quot;,
-    &quot;lastname&quot;: &quot;***&quot;,
-    &quot;nationality&quot;: &quot;***&quot;,
-    &quot;pc&quot;: &quot;***&quot;,
-  },
-  &quot;token&quot;: &quot;...&quot;
-}</code></pre>
-    <h2 id="delete-apiuser"><code>DELETE /api/user</code></h2>
-    <blockquote>
-      <p>Description: Delete a user <code>[Needs Auth]</code></p>
-    </blockquote>
-    <h3 id="query-parameters-3"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>x</td>
-          <td><code>_id</code></td>
-          <td>-</td>
-          <td>ID of a user</td>
-          <td><code>int</code></td>
-        </tr>
-      </tbody>
-    </table>
-    <h3 id="example-3"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  _id: { value },
-});
-axios
-  .delete(apiURL + &quot;/user&quot;, data, {
-    headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 410
-{
-    &quot;status&quot;: 410
-}</code></pre>
-    <h2 id="get-apiuser-1"><code>GET /api/user</code></h2>
-    <blockquote>
-      <p>Description: Get one user</p>
-    </blockquote>
-    <h3 id="query-parameters-4"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>x</td>
-          <td><code>id</code></td>
-          <td>-</td>
-          <td>ID of a user</td>
-          <td><code>int</code></td>
-        </tr>
-      </tbody>
-    </table>
-    <h3 id="example-4"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  _id: { value },
-});
-axios
-  .get(apiURL + &quot;/user&quot;, data, {
-    headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 201
-{
-  &quot;status&quot;: 201,
-  &quot;user&quot;: {
-    &quot;_id&quot;: &quot;***&quot;,
-    &quot;username&quot;: &quot;***&quot;,
-    &quot;firstname&quot;: &quot;***&quot;,
-    &quot;lastname&quot;: &quot;***&quot;,
-    &quot;nationality&quot;: &quot;***&quot;,
-    &quot;pc&quot;: &quot;***&quot;,
-  }
-}</code></pre>
-    <h2 id="post-apiuserauth"><code>POST /api/user/auth</code></h2>
-    <blockquote>
-      <p>Description: Authenticate a user</p>
-    </blockquote>
-    <h3 id="query-parameters-5"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>x</td>
-          <td><code>username</code></td>
-          <td>-</td>
-          <td>Username of a user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>password</code></td>
-          <td>-</td>
-          <td>Password of a user</td>
-          <td><code>string</code></td>
-        </tr>
-      </tbody>
-    </table>
-    <h3 id="example-5"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  username: { value },
-  password: { value },
-});
-axios
-  .post(apiURL + &quot;/user/auth&quot;, data, {
-    headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 200
-{
-  &quot;status&quot;: 200,
-  &quot;token&quot;: &quot;...&quot;
-}</code></pre>
   </body>
 </html>

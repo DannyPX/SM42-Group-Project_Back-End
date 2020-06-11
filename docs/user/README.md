@@ -5,7 +5,7 @@
 | Base    | `/api/user` |
 | Version | `.V2`       |
 
-## `POST /api/user{params}`
+## `POST /api/user`
 
 > Description: Create a user
 
@@ -73,14 +73,6 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
-  username: { value },
-  password: { value },
-  firstname: { value },
-  lastname: { value },
-  nationality: { value },
-  pc: { value },
-});
 axios
   .get(apiURL + "/user")
   .then((response) => {
@@ -113,7 +105,7 @@ STATUS 200
 }
 ```
 
-## `PUT /api/user{params}`
+## `PUT /api/user`
 
 > Description: Update a user `[Needs Auth]`
 
@@ -121,13 +113,13 @@ STATUS 200
 
 | Required | Paramenters   | Default | Description           | Format   |
 | -------- | ------------- | ------- | --------------------- | -------- |
-| x        | `id`          | -       | ID of a user          | `int`    |
-|          | `username`    | -       | Username of a user    | `string` |
-|          | `password`    | -       | Password of a user    | `string` |
-|          | `firstname`   | -       | Firstname of a user   | `string` |
-|          | `lastname`    | -       | Lastname of a user    | `string` |
-|          | `nationality` | -       | Nationality of a user | `string` |
-|          | `pc`          | -       | Postal Code of a user | `nnnnss` |
+| x        | `_id`         | -       | ID of a user          | `int`    |
+| x        | `username`    | -       | Username of a user    | `string` |
+| x        | `password`    | -       | Password of a user    | `string` |
+| x        | `firstname`   | -       | Firstname of a user   | `string` |
+| x        | `lastname`    | -       | Lastname of a user    | `string` |
+| x        | `nationality` | -       | Nationality of a user | `string` |
+| x        | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
 ### **Example**
 
@@ -174,7 +166,7 @@ STATUS 201
 }
 ```
 
-## `DELETE /api/user{params}`
+## `DELETE /api/user`
 
 > Description: Delete a user `[Needs Auth]`
 
@@ -182,7 +174,7 @@ STATUS 201
 
 | Required | Paramenters | Default | Description  | Format |
 | -------- | ----------- | ------- | ------------ | ------ |
-| x        | `id`        | -       | ID of a user | `int`  |
+| x        | `_id`       | -       | ID of a user | `int`  |
 
 ### **Example**
 
@@ -214,7 +206,7 @@ STATUS 410
 }
 ```
 
-## `GET /api/user{params}`
+## `GET /api/user`
 
 > Description: Get one user
 
@@ -261,7 +253,7 @@ STATUS 201
 }
 ```
 
-## `POST /api/user/auth{params}`
+## `POST /api/user/auth`
 
 > Description: Authenticate a user
 

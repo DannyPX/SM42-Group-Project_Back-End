@@ -19,14 +19,33 @@
 | Version | `.V2`        |
 | Docs    | `/docs/user` |
 
-| Request                       | Description         |
-| ----------------------------- | ------------------- |
-| `POST /api/user{params}`      | Create a user       |
-| `GET /api/user`               | Get all users       |
-| `PUT /api/user`               | Update a user       |
-| `DELETE /api/user{params}`    | Delete a user       |
-| `GET /api/user{params}`       | Get one user        |
-| `POST /api/user/auth{params}` | Authenticate a user |
+| Request               | Description         |
+| --------------------- | ------------------- |
+| `POST /api/user`      | Create a user       |
+| `GET /api/user`       | Get all users       |
+| `PUT /api/user`       | Update a user       |
+| `DELETE /api/user`    | Delete a user       |
+| `GET /api/user`       | Get one user        |
+| `POST /api/user/auth` | Authenticate a user |
+
+### Buddy
+
+|         |               |
+| ------- | ------------- |
+| Base    | `/api/buddy`  |
+| Version | `.V1`         |
+| Docs    | `/docs/buddy` |
+
+| Request                         | Description                                               |
+| ------------------------------- | --------------------------------------------------------- |
+| `POST /api/buddy/card`          | Create a card                                             |
+| `GET /api/buddy/card`           | Get all cards                                             |
+| `PUT /api/buddy/card`           | Update a card                                             |
+| `DELETE /api/buddy/card`        | Delete a card                                             |
+| `GET /api/buddy/card/newcomer`  | Get one card                                              |
+| `POST /api/buddy/card/newcomer` | Accept and assign user that accepted the card to the card |
+| `GET /api/buddy/chat`           | ???                                                       |
+| `POST /api/buddy/chat`          | ???                                                       |
 
 ## Javascript Usage (no Auth requests)
 
@@ -101,3 +120,9 @@ fetch("apiURL" + "/{requestName}", {
 - Modified user API
   - Modified user Schemas
 - Added TokenManager Authorization
+
+### `V0.3` WIP
+
+#### Changelog
+
+- Card Implementation

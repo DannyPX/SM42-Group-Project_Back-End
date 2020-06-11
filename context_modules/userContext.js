@@ -104,8 +104,8 @@ exports.getAllUser = function () {
 
 exports.updateUser = function (data) {
   var hash = crypto.createHash("sha256");
-  var pass = hash.update(data.password, "utf8", "hex");
-  data.password = pass.digest("hex");
+  var pass = hash.update(user.password, "utf8", "hex");
+  user.password = pass.digest("hex");
   return Users.findByIdAndUpdate(data._id, updateUser(data))
     .then((doc) => {
       var result = generateToken(doc._id);
