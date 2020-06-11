@@ -121,7 +121,7 @@ fetch("apiURL" + "/{requestName}", {
   - Modified user Schemas
 - Added TokenManager Authorization
 
-### `V0.3` WIP
+### `V0.3`
 
 #### Changelog
 

@@ -277,7 +277,7 @@ STATUS 201
 
 ## `GET /api/buddy/card/own`
 
-> Description: Get own cards
+> Description: Get own cards `[Needs Auth]`
 
 ### **Query Parameters**
 
@@ -329,7 +329,7 @@ STATUS 200
 
 ## `GET /api/buddy/card/other`
 
-> Description: Get other cards
+> Description: Get other cards `[Needs Auth]`
 
 ### **Query Parameters**
 
@@ -381,7 +381,7 @@ STATUS 200
 
 ## `GET /api/buddy/card/accept`
 
-> Description: Accept card
+> Description: Accept card `[Needs Auth]`
 
 ### **Query Parameters**
 
@@ -438,7 +438,7 @@ STATUS 200
 
 ## `GET /api/buddy/card/accepted`
 
-> Description: Get accepted cards
+> Description: Get accepted cards `[Needs Auth]`
 
 ### **Query Parameters**
 
