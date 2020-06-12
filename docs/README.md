@@ -1,6 +1,6 @@
 # Local Buddy
 
-> Version: `0.2`
+> Version: `0.4`
 
 > Author:
 
@@ -16,7 +16,7 @@
 |         |              |
 | ------- | ------------ |
 | Base    | `/api/user`  |
-| Version | `.V2`        |
+| Version | `.V3`        |
 | Docs    | `/docs/user` |
 
 | Request               | Description         |
@@ -33,7 +33,7 @@
 |         |               |
 | ------- | ------------- |
 | Base    | `/api/buddy`  |
-| Version | `.V1`         |
+| Version | `.V2`         |
 | Docs    | `/docs/buddy` |
 
 | Request                         | Description                                               |
@@ -126,3 +126,12 @@ fetch("apiURL" + "/{requestName}", {
 #### Changelog
 
 - Card Implementation
+
+### `V0.4`
+
+#### Changelog
+
+- Auth token changes to consist of more credentials
+- Card changes to new Auth token
+  - Card requires less parameters to fill in card values due to usage of token data
+  - Modifed Buddy Docs

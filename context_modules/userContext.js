@@ -43,12 +43,15 @@ function updateUser(user) {
   };
 }
 
-function generateToken(_id) {
+function generateToken(data) {
   return tokenManager.generate({
     expireAfterSeconds: false,
     size: 64,
     data: {
-      _id: _id,
+      _id: data._id,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      nationality: data.nationality,
     },
   });
 }
@@ -101,8 +104,8 @@ exports.updateUser = function (data) {
   var pass = hash.update(user.password, "utf8", "hex");
   user.password = pass.digest("hex");
   return Users.findByIdAndUpdate(data._id, updateUser(data))
-    .then((doc) => {
-      var result = generateToken(doc._id);
+    .then(() => {
+      var result = generateToken(data);
       return {
         status: 201,
         user: responseUser(data),
@@ -157,7 +160,7 @@ exports.authUser = function (data) {
       var pass = hash.update(data.password, "utf8", "hex");
       data.password = pass.digest("hex");
       if (doc.password === data.password) {
-        var result = generateToken(doc._id);
+        var result = generateToken(doc);
         return {
           status: 200,
           token: result.secret,

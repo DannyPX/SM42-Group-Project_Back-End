@@ -389,34 +389,6 @@
       </thead>
       <tbody>
         <tr>
-          <td>x</td>
-          <td><code>_sender</code></td>
-          <td>-</td>
-          <td>User ID of the creator</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>firstname</code></td>
-          <td>-</td>
-          <td>Firstname of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>lastname</code></td>
-          <td>-</td>
-          <td>Lastname of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><code>nationality</code></td>
-          <td>-</td>
-          <td>Nationality of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
           <td></td>
           <td><code>bio</code></td>
           <td>-</td>
@@ -448,10 +420,6 @@
     </table>
     <h3 id="example"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
-  _sender: { value },
-  firstname: { value },
-  lastname: { value },
-  nationality: { value },
   bio: { value },
   title: { value },
   text: { value },
@@ -536,7 +504,7 @@ STATUS 200
 }</code></pre>
     <h2 id="put-apibuddycard"><code>PUT /api/buddy/card</code></h2>
     <blockquote>
-      <p>Description: Update a user <code>[Needs Auth]</code></p>
+      <p>Description: Update a card <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-2"><strong>Query Parameters</strong></h3>
     <table>
@@ -554,36 +522,8 @@ STATUS 200
           <td>x</td>
           <td><code>_id</code></td>
           <td>-</td>
-          <td>ID of a user</td>
+          <td>ID of a card</td>
           <td><code>int</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>_sender</code></td>
-          <td>-</td>
-          <td>User ID of the creator</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>firstname</code></td>
-          <td>-</td>
-          <td>Firstname of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>lastname</code></td>
-          <td>-</td>
-          <td>Lastname of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>nationality</code></td>
-          <td>-</td>
-          <td>Nationality of the user</td>
-          <td><code>string</code></td>
         </tr>
         <tr>
           <td>x</td>
@@ -618,10 +558,6 @@ STATUS 200
     <h3 id="example-2"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
   _id: { value },
-  _sender: { value },
-  firstname: { value },
-  lastname: { value },
-  nationality: { value },
   bio: { value },
   title: { value },
   text: { value },
@@ -723,7 +659,7 @@ STATUS 410
       <tbody>
         <tr>
           <td>x</td>
-          <td><code>id</code></td>
+          <td><code>_id</code></td>
           <td>-</td>
           <td>ID of a card</td>
           <td><code>int</code></td>
@@ -886,13 +822,6 @@ STATUS 200
           <td><code>_id</code></td>
           <td>-</td>
           <td>ID of the card</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>_acceptor</code></td>
-          <td>-</td>
-          <td>ID of the acceptor</td>
           <td><code>string</code></td>
         </tr>
       </tbody>

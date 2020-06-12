@@ -3,7 +3,7 @@
 |         |              |
 | ------- | ------------ |
 | Base    | `/api/buddy` |
-| Version | `.V1`        |
+| Version | `.V2`        |
 
 ## `POST /api/buddy/card`
 
@@ -11,25 +11,17 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters   | Default | Description                | Format                   |
-| -------- | ------------- | ------- | -------------------------- | ------------------------ |
-| x        | `_sender`     | -       | User ID of the creator     | `string`                 |
-| x        | `firstname`   | -       | Firstname of the user      | `string`                 |
-| x        | `lastname`    | -       | Lastname of the user       | `string`                 |
-|          | `nationality` | -       | Nationality of the user    | `string`                 |
-|          | `bio`         | -       | Bio of the user            | `string`                 |
-| x        | `title`       | -       | Title of the card          | `string`                 |
-| x        | `text`        | -       | Description of the problem | `string`                 |
-| x        | `type`        | -       | Type of the problem        | `"request" - "question"` |
+| Required | Paramenters | Default | Description                | Format                   |
+| -------- | ----------- | ------- | -------------------------- | ------------------------ |
+|          | `bio`       | -       | Bio of the user            | `string`                 |
+| x        | `title`     | -       | Title of the card          | `string`                 |
+| x        | `text`      | -       | Description of the problem | `string`                 |
+| x        | `type`      | -       | Type of the problem        | `"request" - "question"` |
 
 ### **Example**
 
 ```js
 let data = JSON.stringify({
-  _sender: { value },
-  firstname: { value },
-  lastname: { value },
-  nationality: { value },
   bio: { value },
   title: { value },
   text: { value },
@@ -120,31 +112,23 @@ STATUS 200
 
 ## `PUT /api/buddy/card`
 
-> Description: Update a user `[Needs Auth]`
+> Description: Update a card `[Needs Auth]`
 
 ### **Query Parameters**
 
-| Required | Paramenters   | Default | Description                | Format                   |
-| -------- | ------------- | ------- | -------------------------- | ------------------------ |
-| x        | `_id`         | -       | ID of a user               | `int`                    |
-| x        | `_sender`     | -       | User ID of the creator     | `string`                 |
-| x        | `firstname`   | -       | Firstname of the user      | `string`                 |
-| x        | `lastname`    | -       | Lastname of the user       | `string`                 |
-| x        | `nationality` | -       | Nationality of the user    | `string`                 |
-| x        | `bio`         | -       | Bio of the user            | `string`                 |
-| x        | `title`       | -       | Title of the card          | `string`                 |
-| x        | `text`        | -       | Description of the problem | `string`                 |
-| x        | `type`        | -       | Type of the problem        | `"request" - "question"` |
+| Required | Paramenters | Default | Description                | Format                   |
+| -------- | ----------- | ------- | -------------------------- | ------------------------ |
+| x        | `_id`       | -       | ID of a card               | `int`                    |
+| x        | `bio`       | -       | Bio of the user            | `string`                 |
+| x        | `title`     | -       | Title of the card          | `string`                 |
+| x        | `text`      | -       | Description of the problem | `string`                 |
+| x        | `type`      | -       | Type of the problem        | `"request" - "question"` |
 
 ### **Example**
 
 ```js
 let data = JSON.stringify({
   _id: { value },
-  _sender: { value },
-  firstname: { value },
-  lastname: { value },
-  nationality: { value },
   bio: { value },
   title: { value },
   text: { value },
@@ -233,7 +217,7 @@ STATUS 410
 
 | Required | Paramenters | Default | Description  | Format |
 | -------- | ----------- | ------- | ------------ | ------ |
-| x        | `id`        | -       | ID of a card | `int`  |
+| x        | `_id`       | -       | ID of a card | `int`  |
 
 ### **Example**
 
@@ -385,10 +369,9 @@ STATUS 200
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description        | Format   |
-| -------- | ----------- | ------- | ------------------ | -------- |
-| x        | `_id`       | -       | ID of the card     | `string` |
-| x        | `_acceptor` | -       | ID of the acceptor | `string` |
+| Required | Paramenters | Default | Description    | Format   |
+| -------- | ----------- | ------- | -------------- | -------- |
+| x        | `_id`       | -       | ID of the card | `string` |
 
 ### **Example**
 

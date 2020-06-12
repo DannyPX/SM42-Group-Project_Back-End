@@ -3,7 +3,7 @@
 |         |             |
 | ------- | ----------- |
 | Base    | `/api/user` |
-| Version | `.V2`       |
+| Version | `.V3`       |
 
 ## `POST /api/user`
 

@@ -193,9 +193,6 @@ app.post(
   }),
   async function (req, res) {
     if (
-      typeof req.body._sender == "undefined" ||
-      typeof req.body.firstname == "undefined" ||
-      typeof req.body.lastname == "undefined" ||
       typeof req.body.title == "undefined" ||
       typeof req.body.text == "undefined" ||
       typeof req.body.text == "undefined" ||
@@ -206,7 +203,18 @@ app.post(
         error: "Not all required fields are filled in",
       });
     } else if (req.body.type == "request" || req.body.type == "question") {
-      var response = await buddyContext.createCard(req.body);
+      const { token } = req;
+      let data = {
+        _sender: token.data._id,
+        firstname: token.data.firstname,
+        lastname: token.data.lastname,
+        nationality: token.data.nationality,
+        bio: req.body.bio,
+        title: req.body.title,
+        text: req.body.text,
+        type: req.body.type,
+      };
+      var response = await buddyContext.createCard(data);
       res.status(response.status);
       res.json(response);
     } else {
@@ -242,13 +250,13 @@ app.put(
   }),
   async function (req, res) {
     const { token } = req;
-    if (token.data._id == req.body._sender) {
+    let data = {
+      _id: req.body._id,
+      _sender: token.data._id,
+    };
+    if (await buddyContext.checkOwnCard(data)) {
       if (
         typeof req.body._id == "undefined" ||
-        typeof req.body._sender == "undefined" ||
-        typeof req.body.firstname == "undefined" ||
-        typeof req.body.lastname == "undefined" ||
-        typeof req.body.nationality == "undefined" ||
         typeof req.body.bio == "undefined" ||
         typeof req.body.title == "undefined" ||
         typeof req.body.text == "undefined" ||
@@ -259,7 +267,18 @@ app.put(
           error: "Not all required fields are filled in",
         });
       } else if (req.body.type == "request" || req.body.type == "question") {
-        var response = await buddyContext.updateCard(req.body);
+        let data = {
+          _id: req.body._id,
+          _sender: token.data._id,
+          firstname: token.data.firstname,
+          lastname: token.data.lastname,
+          nationality: token.data.nationality,
+          bio: req.body.bio,
+          title: req.body.title,
+          text: req.body.text,
+          type: req.body.type,
+        };
+        var response = await buddyContext.updateCard(data);
         res.status(response.status);
         res.json(response);
       } else {
@@ -286,32 +305,21 @@ app.delete(
     });
   }),
   async function (req, res) {
-    if (
-      typeof req.body._id == "undefined" ||
-      typeof req.body._sender == "undefined" ||
-      typeof req.body.firstname == "undefined" ||
-      typeof req.body.lastname == "undefined" ||
-      typeof req.body.nationality == "undefined" ||
-      typeof req.body.bio == "undefined" ||
-      typeof req.body.title == "undefined" ||
-      typeof req.body.text == "undefined" ||
-      typeof req.body.type == "undefined"
-    ) {
-      res.status(400);
-      res.json({
-        error: "Not all required fields are filled in",
-      });
-    } else {
-      const { token } = req;
-      if (token.data._id == req.body._sender) {
-        var response = await buddyContext.deleteCard(req.body);
-        res.status(response.status);
-        res.json(response);
-      } else {
+    const { token } = req;
+    let data = {
+      _id: req.body._id,
+      _sender: token.data._id,
+    };
+    if (await buddyContext.checkOwnCard(data)) {
+      if (typeof req.body._id == "undefined") {
         res.status(400);
         res.json({
-          error: "This is not your card",
+          error: "Not all required fields are filled in",
         });
+      } else {
+        var response = await buddyContext.deleteCard(req.body._id);
+        res.status(response.status);
+        res.json(response);
       }
     }
   }
@@ -358,17 +366,18 @@ app.put(
     });
   }),
   async function (req, res) {
-    if (
-      typeof req.body._id == "undefined" ||
-      typeof req.body._acceptor == "undefined"
-    ) {
+    if (typeof req.body._id == "undefined") {
       res.status(400);
       res.json({
         error: "Not all required fields are filled in",
       });
     } else {
       const { token } = req;
-      var response = await buddyContext.acceptCard(req.body);
+      let data = {
+        _id: req.body._id,
+        _acceptor: token.data._id,
+      };
+      var response = await buddyContext.acceptCard(data);
       res.status(response.status);
       res.json(response);
     }

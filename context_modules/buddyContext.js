@@ -106,8 +106,8 @@ exports.updateCard = function (data) {
     });
 };
 
-exports.deleteCard = function (data) {
-  return Cards.findByIdAndDelete(data._id)
+exports.deleteCard = function (_id) {
+  return Cards.findByIdAndDelete(_id)
     .then(() => {
       return {
         status: 410,
@@ -214,5 +214,15 @@ exports.getOwnAcceptedCards = function (_id) {
         status: 400,
         error: err,
       };
+    });
+};
+
+exports.checkOwnCard = function (data) {
+  return Cards.findOne({ _id: data._id })
+    .then((doc) => {
+      return doc._sender == data._sender;
+    })
+    .catch(() => {
+      return false;
     });
 };
