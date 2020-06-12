@@ -442,7 +442,7 @@
           <td><code>type</code></td>
           <td>-</td>
           <td>Type of the problem</td>
-          <td><code>&quot;task&quot; - &quot;question&quot;</code></td>
+          <td><code>&quot;request&quot; - &quot;question&quot;</code></td>
         </tr>
       </tbody>
     </table>
@@ -611,7 +611,7 @@ STATUS 200
           <td><code>type</code></td>
           <td>-</td>
           <td>Type of the problem</td>
-          <td><code>&quot;task&quot; - &quot;question&quot;</code></td>
+          <td><code>&quot;request&quot; - &quot;question&quot;</code></td>
         </tr>
       </tbody>
     </table>
@@ -765,7 +765,7 @@ STATUS 201
 }</code></pre>
     <h2 id="get-apibuddycardown"><code>GET /api/buddy/card/own</code></h2>
     <blockquote>
-      <p>Description: Get own cards</p>
+      <p>Description: Get own cards <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-5"><strong>Query Parameters</strong></h3>
     <table>
@@ -816,7 +816,7 @@ STATUS 200
 }</code></pre>
     <h2 id="get-apibuddycardother"><code>GET /api/buddy/card/other</code></h2>
     <blockquote>
-      <p>Description: Get other cards</p>
+      <p>Description: Get other cards <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-6"><strong>Query Parameters</strong></h3>
     <table>
@@ -867,7 +867,7 @@ STATUS 200
 }</code></pre>
     <h2 id="get-apibuddycardaccept"><code>GET /api/buddy/card/accept</code></h2>
     <blockquote>
-      <p>Description: Accept card</p>
+      <p>Description: Accept card <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-7"><strong>Query Parameters</strong></h3>
     <table>
@@ -940,7 +940,7 @@ STATUS 200
       <code>GET /api/buddy/card/accepted</code>
     </h2>
     <blockquote>
-      <p>Description: Get accepted cards</p>
+      <p>Description: Get accepted cards <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-8"><strong>Query Parameters</strong></h3>
     <table>
@@ -976,6 +976,7 @@ STATUS 200
     {
       &quot;_id&quot;: &quot;***&quot;,
       &quot;_sender&quot;: &quot;***&quot;,
+      &quot;_acceptor&quot;: &quot;***&quot;,
       &quot;firstname&quot;: &quot;***&quot;,
       &quot;lastname&quot;: &quot;***&quot;,
       &quot;nationality&quot;: &quot;***&quot;,

@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const bodyParser = require("body-parser");
 const tokenManager = require("token-manager-express");
 
@@ -153,16 +152,33 @@ app.delete(
     });
   }),
   async function (req, res) {
-    var response = await userContext.deleteUser(req.body);
-    res.status(response.status);
-    res.json(response);
+    if (typeof req.body._id == "undefined") {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      var response = await userContext.deleteUser(req.body);
+      res.status(response.status);
+      res.json(response);
+    }
   }
 );
 
 app.post("/api/user/auth", async function (req, res) {
-  var response = await userContext.authUser(req.body);
-  res.status(response.status);
-  res.json(response);
+  if (
+    typeof req.body.username == "undefined" ||
+    typeof req.body.password == "undefined"
+  ) {
+    res.status(400);
+    res.json({
+      error: "Not all required fields are filled in",
+    });
+  } else {
+    var response = await userContext.authUser(req.body);
+    res.status(response.status);
+    res.json(response);
+  }
 });
 /* #endregion */
 
@@ -189,7 +205,7 @@ app.post(
       res.json({
         error: "Not all required fields are filled in",
       });
-    } else if (req.body.type == "task" || req.body.type == "question") {
+    } else if (req.body.type == "request" || req.body.type == "question") {
       var response = await buddyContext.createCard(req.body);
       res.status(response.status);
       res.json(response);
@@ -242,10 +258,15 @@ app.put(
         res.json({
           error: "Not all required fields are filled in",
         });
-      } else {
+      } else if (req.body.type == "request" || req.body.type == "question") {
         var response = await buddyContext.updateCard(req.body);
         res.status(response.status);
         res.json(response);
+      } else {
+        res.status(400);
+        res.json({
+          error: "Type is not correct",
+        });
       }
     } else {
       res.status(400);

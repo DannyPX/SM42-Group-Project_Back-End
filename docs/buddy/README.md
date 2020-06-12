@@ -11,16 +11,16 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters   | Default | Description                | Format                |
-| -------- | ------------- | ------- | -------------------------- | --------------------- |
-| x        | `_sender`     | -       | User ID of the creator     | `string`              |
-| x        | `firstname`   | -       | Firstname of the user      | `string`              |
-| x        | `lastname`    | -       | Lastname of the user       | `string`              |
-|          | `nationality` | -       | Nationality of the user    | `string`              |
-|          | `bio`         | -       | Bio of the user            | `string`              |
-| x        | `title`       | -       | Title of the card          | `string`              |
-| x        | `text`        | -       | Description of the problem | `string`              |
-| x        | `type`        | -       | Type of the problem        | `"task" - "question"` |
+| Required | Paramenters   | Default | Description                | Format                   |
+| -------- | ------------- | ------- | -------------------------- | ------------------------ |
+| x        | `_sender`     | -       | User ID of the creator     | `string`                 |
+| x        | `firstname`   | -       | Firstname of the user      | `string`                 |
+| x        | `lastname`    | -       | Lastname of the user       | `string`                 |
+|          | `nationality` | -       | Nationality of the user    | `string`                 |
+|          | `bio`         | -       | Bio of the user            | `string`                 |
+| x        | `title`       | -       | Title of the card          | `string`                 |
+| x        | `text`        | -       | Description of the problem | `string`                 |
+| x        | `type`        | -       | Type of the problem        | `"request" - "question"` |
 
 ### **Example**
 
@@ -124,17 +124,17 @@ STATUS 200
 
 ### **Query Parameters**
 
-| Required | Paramenters   | Default | Description                | Format                |
-| -------- | ------------- | ------- | -------------------------- | --------------------- |
-| x        | `_id`         | -       | ID of a user               | `int`                 |
-| x        | `_sender`     | -       | User ID of the creator     | `string`              |
-| x        | `firstname`   | -       | Firstname of the user      | `string`              |
-| x        | `lastname`    | -       | Lastname of the user       | `string`              |
-| x        | `nationality` | -       | Nationality of the user    | `string`              |
-| x        | `bio`         | -       | Bio of the user            | `string`              |
-| x        | `title`       | -       | Title of the card          | `string`              |
-| x        | `text`        | -       | Description of the problem | `string`              |
-| x        | `type`        | -       | Type of the problem        | `"task" - "question"` |
+| Required | Paramenters   | Default | Description                | Format                   |
+| -------- | ------------- | ------- | -------------------------- | ------------------------ |
+| x        | `_id`         | -       | ID of a user               | `int`                    |
+| x        | `_sender`     | -       | User ID of the creator     | `string`                 |
+| x        | `firstname`   | -       | Firstname of the user      | `string`                 |
+| x        | `lastname`    | -       | Lastname of the user       | `string`                 |
+| x        | `nationality` | -       | Nationality of the user    | `string`                 |
+| x        | `bio`         | -       | Bio of the user            | `string`                 |
+| x        | `title`       | -       | Title of the card          | `string`                 |
+| x        | `text`        | -       | Description of the problem | `string`                 |
+| x        | `type`        | -       | Type of the problem        | `"request" - "question"` |
 
 ### **Example**
 

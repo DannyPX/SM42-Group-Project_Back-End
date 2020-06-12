@@ -14,7 +14,7 @@ const cardSchema = new Schema({
   bio: String,
   title: String,
   text: String,
-  type: String, // Type of card, e.g. Task, Question
+  type: String, // Type of card, e.g. Request, Question
   _acceptor: String,
 });
 
