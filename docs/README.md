@@ -36,16 +36,33 @@
 | Version | `.V2`         |
 | Docs    | `/docs/buddy` |
 
-| Request                         | Description                                               |
-| ------------------------------- | --------------------------------------------------------- |
-| `POST /api/buddy/card`          | Create a card                                             |
-| `GET /api/buddy/card`           | Get all cards                                             |
-| `PUT /api/buddy/card`           | Update a card                                             |
-| `DELETE /api/buddy/card`        | Delete a card                                             |
-| `GET /api/buddy/card`           | Get one card                                              |
-| `POST /api/buddy/card/newcomer` | Accept and assign user that accepted the card to the card |
-| `GET /api/buddy/chat`           | ???                                                       |
-| `POST /api/buddy/chat`          | ???                                                       |
+| Request                        | Description        |
+| ------------------------------ | ------------------ |
+| `POST /api/buddy/card`         | Create a card      |
+| `GET /api/buddy/card`          | Get all cards      |
+| `PUT /api/buddy/card`          | Update a card      |
+| `DELETE /api/buddy/card`       | Delete a card      |
+| `GET /api/buddy/card`          | Get one card       |
+| `GET /api/buddy/card/own`      | Get own cards      |
+| `GET /api/buddy/card/other`    | Get other cards    |
+| `GET /api/buddy/card/accept`   | Accept card        |
+| `GET /api/buddy/card/accepted` | Get accepted cards |
+
+### Buddy
+
+|         |              |
+| ------- | ------------ |
+| Base    | `/api/chat`  |
+| Version | `.V1`        |
+| Docs    | `/docs/chat` |
+
+| Request                  | Description      |
+| ------------------------ | ---------------- |
+| `POST /api/chat`         | Create a chat    |
+| `GET /api/chat`          | Get one chat     |
+| `PUT /api/chat`          | Update chat info |
+| `POST /api/chat/message` | Send message     |
+| `GET /api/chat/own`      | Get own chats    |
 
 ## Javascript Usage (no Auth requests)
 

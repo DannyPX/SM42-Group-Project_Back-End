@@ -23,6 +23,7 @@ mongoose
 const markdown = require("./modules/markdown");
 const userContext = require("./context_modules/userContext");
 const buddyContext = require("./context_modules/buddyContext");
+const chatContext = require("./context_modules/chatContext");
 
 // Markdown API document
 markdown.init();
@@ -51,6 +52,10 @@ app.get("/docs/user", function (req, res) {
 app.get("/docs/buddy", function (req, res) {
   res.sendFile(path.join(__dirname + "/docs/buddy/index.html"));
 });
+
+app.get("/docs/chat", function (req, res) {
+  res.sendFile(path.join(__dirname + "/docs/chat/index.html"));
+});
 /* #endregion */
 
 // App listeners
@@ -66,7 +71,8 @@ app.get("/api", function (req, res) {
     api: {
       user: 200,
       nb: 404,
-      buddy: 501,
+      buddy: 200,
+      chat: 501,
       events: 404,
     },
     db: mongoose.connection.readyState,
@@ -202,7 +208,7 @@ app.post(
       res.json({
         error: "Not all required fields are filled in",
       });
-    } else if (req.body.type == "request" || req.body.type == "question") {
+    } else if (req.body.type == "Request" || req.body.type == "Question") {
       const { token } = req;
       let data = {
         _sender: token.data._id,
@@ -266,7 +272,7 @@ app.put(
         res.json({
           error: "Not all required fields are filled in",
         });
-      } else if (req.body.type == "request" || req.body.type == "question") {
+      } else if (req.body.type == "Request" || req.body.type == "Question") {
         let data = {
           _id: req.body._id,
           _sender: token.data._id,
@@ -395,6 +401,179 @@ app.get(
   async function (req, res) {
     const { token } = req;
     var response = await buddyContext.getOwnAcceptedCards(token.data._id);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+/* #endregion */
+
+/* #region  CHAT_API */
+app.post(
+  "/api/chat",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (typeof req.body.participants == "undefined") {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      const { token } = req;
+      var participants = [];
+      var chattemp = "";
+      var chatname = "";
+      var result = JSON.parse(req.body.participants);
+      result.push({
+        _id: token.data._id,
+      });
+      new Promise((resolve, reject) => {
+        result.forEach(async function (element, index, array) {
+          var user = await userContext.getUser({
+            _id: element._id,
+          });
+          participants.push({
+            _id: user.user._id,
+            firstname: user.user.firstname,
+            lastname: user.user.lastname,
+          });
+          if (
+            req.body.chatname == "" ||
+            typeof req.body.chatname == "undefined"
+          ) {
+            chattemp += ", " + user.user.firstname;
+          }
+          if (index === array.length - 1) resolve();
+        });
+      }).then(async () => {
+        if (
+          req.body.chatname == "" ||
+          typeof req.body.chatname == "undefined"
+        ) {
+          chatname = chattemp.substr(2);
+        }
+        var response = await chatContext.createChat({
+          participants: participants,
+          chatname: chatname,
+        });
+        res.status(response.status);
+        res.json(response);
+      });
+    }
+  }
+);
+
+app.get(
+  "/api/chat",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (typeof req.body._id == "undefined") {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      var response = await chatContext.getChat(req.body);
+      res.status(response.status);
+      res.json(response);
+    }
+  }
+);
+
+app.put(
+  "/api/chat",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (
+      typeof req.body._id == "undefined" ||
+      typeof req.body.chatname == "undefined"
+    ) {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      var response = await chatContext.updateChatName(req.body);
+      res.status(response.status);
+      res.json(response);
+    }
+  }
+);
+
+app.delete(
+  "/api/chat",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    if (typeof req.body._id == "undefined") {
+      res.status(400);
+      res.json({
+        error: "Not all required fields are filled in",
+      });
+    } else {
+      var response = await chatContext.deleteChat(req.body._id);
+      res.status(response.status);
+      res.json(response);
+    }
+  }
+);
+
+app.get(
+  "/api/chat/own",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    const { token } = req;
+    let data = {
+      _id: token.data._id,
+    };
+    var response = await chatContext.getOwnChats(data);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
+app.post(
+  "/api/chat/message",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    const { token } = req;
+    let data = {
+      _id: req.body._id,
+      _userid: token.data._id,
+      message: req.body.message,
+    };
+    var response;
+    await chatContext.sendMessage(data).then(async () => {
+      response = await chatContext.getChat(data);
+    });
     res.status(response.status);
     res.json(response);
   }

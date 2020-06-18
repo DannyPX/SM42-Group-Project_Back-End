@@ -353,7 +353,7 @@
     </style>
   </head>
   <body>
-    <h2 id="buddy-api">Buddy API</h2>
+    <h2 id="chat-api">Chat API</h2>
     <table>
       <thead>
         <tr>
@@ -364,17 +364,17 @@
       <tbody>
         <tr>
           <td>Base</td>
-          <td><code>/api/buddy</code></td>
+          <td><code>/api/chat</code></td>
         </tr>
         <tr>
           <td>Version</td>
-          <td><code>.V2</code></td>
+          <td><code>.V1</code></td>
         </tr>
       </tbody>
     </table>
-    <h2 id="post-apibuddycard"><code>POST /api/buddy/card</code></h2>
+    <h2 id="post-apichat"><code>POST /api/chat</code></h2>
     <blockquote>
-      <p>Description: Create a card <code>[Needs Auth]</code></p>
+      <p>Description: Create a chat <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters"><strong>Query Parameters</strong></h3>
     <table>
@@ -389,44 +389,36 @@
       </thead>
       <tbody>
         <tr>
+          <td>x</td>
+          <td><code>participants</code></td>
+          <td>-</td>
+          <td>IDs of participants(except yourself)</td>
+          <td><code>Array</code></td>
+        </tr>
+        <tr>
           <td></td>
-          <td><code>bio</code></td>
+          <td><code>chatname</code></td>
           <td>-</td>
-          <td>Bio of the user</td>
+          <td>Name of the chat</td>
           <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>title</code></td>
-          <td>-</td>
-          <td>Title of the card</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>text</code></td>
-          <td>-</td>
-          <td>Description of the problem</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>type</code></td>
-          <td>-</td>
-          <td>Type of the problem</td>
-          <td><code>&quot;Request&quot; - &quot;Question&quot;</code></td>
         </tr>
       </tbody>
     </table>
     <h3 id="example"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
-  bio: { value },
-  title: { value },
-  text: { value },
-  type: { value },
-});
+  participants: [
+    {
+      value
+    },
+    {
+      value
+    },
+    ...
+  ],
+  chatname: { value }
+})
 axios
-  .post(apiURL + &quot;/buddy/card&quot;, data, {
+  .post(apiURL + &quot;/chat&quot;, data , {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
       Authorization: `Bearer ${token}`,
@@ -443,21 +435,24 @@ axios
 STATUS 201
 {
   &quot;status&quot;: 201,
-  &quot;user&quot;: {
-    &quot;_id&quot;: &quot;***&quot;,
-    &quot;_sender&quot;: &quot;***&quot;,
-    &quot;firstname&quot;: &quot;***&quot;,
-    &quot;lastname&quot;: &quot;***&quot;,
-    &quot;nationality&quot;: &quot;***&quot;,
-    &quot;bio&quot;: &quot;***&quot;,
-    &quot;title&quot;: &quot;***&quot;,
-    &quot;text&quot;: &quot;***&quot;,
-    &quot;type&quot;: &quot;***&quot;,
-  }
+  &quot;chat&quot;: [
+    {
+      &quot;_id&quot;: &quot;***&quot;,
+      &quot;chatname&quot;: &quot;***&quot;,
+      &quot;participants&quot;: [
+        {
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;firstname&quot;: &quot;***&quot;,
+          &quot;lastname&quot;: &quot;***&quot;
+        },
+        ...
+      ]
+    }
+  ]
 }</code></pre>
-    <h2 id="get-apibuddycard"><code>GET /api/buddy/card</code></h2>
+    <h2 id="put-apichat"><code>PUT /api/chat</code></h2>
     <blockquote>
-      <p>Description: Get all cards</p>
+      <p>Description: Update chatname <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-1"><strong>Query Parameters</strong></h3>
     <table>
@@ -470,10 +465,27 @@ STATUS 201
           <th>Format</th>
         </tr>
       </thead>
+      <tbody>
+        <tr>
+          <td>x</td>
+          <td><code>chatname</code></td>
+          <td>-</td>
+          <td>Name of the chat</td>
+          <td><code>string</code></td>
+        </tr>
+      </tbody>
     </table>
     <h3 id="example-1"><strong>Example</strong></h3>
-    <pre><code class="language-js">axios
-  .get(apiURL + &quot;/buddy/card&quot;)
+    <pre><code class="language-js">let data = JSON.stringify({
+  chatname: { value },
+});
+axios
+  .put(apiURL + &quot;/chat&quot;, data, {
+    headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      Authorization: `Bearer ${token}`,
+    },
+  })
   .then((response) =&gt; {
     // Your code
   })
@@ -482,29 +494,18 @@ STATUS 201
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 200
+STATUS 201
 {
-  &quot;status&quot;: 200,
-  &quot;cards&quot;: [
+  &quot;status&quot;: 201,
+  &quot;chat&quot;: [
     {
-      &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    },
-    {
-      ...
+      &quot;chatname&quot;: &quot;***&quot;,
     }
   ]
 }</code></pre>
-    <h2 id="put-apibuddycard"><code>PUT /api/buddy/card</code></h2>
+    <h2 id="delete-apichat"><code>DELETE /api/chat</code></h2>
     <blockquote>
-      <p>Description: Update a card <code>[Needs Auth]</code></p>
+      <p>Description: Delete chat <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-2"><strong>Query Parameters</strong></h3>
     <table>
@@ -522,108 +523,17 @@ STATUS 200
           <td>x</td>
           <td><code>_id</code></td>
           <td>-</td>
-          <td>ID of a card</td>
-          <td><code>int</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>bio</code></td>
-          <td>-</td>
-          <td>Bio of the user</td>
+          <td>Chat ID</td>
           <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>title</code></td>
-          <td>-</td>
-          <td>Title of the card</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>text</code></td>
-          <td>-</td>
-          <td>Description of the problem</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
-          <td><code>type</code></td>
-          <td>-</td>
-          <td>Type of the problem</td>
-          <td><code>&quot;Request&quot; - &quot;Question&quot;</code></td>
         </tr>
       </tbody>
     </table>
     <h3 id="example-2"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
   _id: { value },
-  bio: { value },
-  title: { value },
-  text: { value },
-  type: { value },
 });
 axios
-  .put(apiURL + &quot;/buddy/card&quot;, data, {
-    headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 201
-{
-  &quot;status&quot;: 201,
-  &quot;card&quot;: {
-      &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    }
-}</code></pre>
-    <h2 id="delete-apibuddycard"><code>DELETE /api/buddy/card</code></h2>
-    <blockquote>
-      <p>Description: Delete a card <code>[Needs Auth]</code></p>
-    </blockquote>
-    <h3 id="query-parameters-3"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>x</td>
-          <td><code>_id</code></td>
-          <td>-</td>
-          <td>ID of a card</td>
-          <td><code>int</code></td>
-        </tr>
-      </tbody>
-    </table>
-    <h3 id="example-3"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  _id: { value },
-});
-axios
-  .delete(apiURL + &quot;/buddy/card&quot;, data, {
+  .delete(apiURL + &quot;/chat&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
       Authorization: `Bearer ${token}`,
@@ -641,11 +551,11 @@ STATUS 410
 {
     &quot;status&quot;: 410
 }</code></pre>
-    <h2 id="get-apibuddycard-1"><code>GET /api/buddy/card</code></h2>
+    <h2 id="get-apichat"><code>GET /api/chat</code></h2>
     <blockquote>
-      <p>Description: Get one card</p>
+      <p>Description: Get chat by ID <code>[Needs Auth]</code></p>
     </blockquote>
-    <h3 id="query-parameters-4"><strong>Query Parameters</strong></h3>
+    <h3 id="query-parameters-3"><strong>Query Parameters</strong></h3>
     <table>
       <thead>
         <tr>
@@ -661,19 +571,20 @@ STATUS 410
           <td>x</td>
           <td><code>_id</code></td>
           <td>-</td>
-          <td>ID of a card</td>
-          <td><code>int</code></td>
+          <td>Chat ID</td>
+          <td><code>string</code></td>
         </tr>
       </tbody>
     </table>
-    <h3 id="example-4"><strong>Example</strong></h3>
+    <h3 id="example-3"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
   _id: { value },
 });
 axios
-  .get(apiURL + &quot;/buddy/card&quot;, data, {
+  .get(apiURL + &quot;/chat&quot;, data, {
     headers: {
       &quot;Content-Type&quot;: &quot;application/json&quot;,
+      Authorization: `Bearer ${token}`,
     },
   })
   .then((response) =&gt; {
@@ -687,125 +598,99 @@ axios
 STATUS 201
 {
   &quot;status&quot;: 201,
-  &quot;user&quot;: {
+  &quot;chat&quot;: [
+    {
       &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
+      &quot;chatname&quot;: &quot;***&quot;,
+      &quot;participants&quot;: [
+        {
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;firstname&quot;: &quot;***&quot;,
+          &quot;lastname&quot;: &quot;***&quot;
+        },
+        ...
+      ],
+      &quot;chatlog&quot;: [
+        {
+          &quot;message&quot;: &quot;***&quot;,
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;date&quot;: &quot;***&quot;
+        },
+                {
+          &quot;message&quot;: &quot;***&quot;,
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;date&quot;: &quot;***&quot;
+        },
+        ...
+      ]
     }
+  ]
 }</code></pre>
-    <h2 id="get-apibuddycardown"><code>GET /api/buddy/card/own</code></h2>
+    <h2 id="get-apichatown"><code>GET /api/chat/own</code></h2>
     <blockquote>
-      <p>Description: Get own cards <code>[Needs Auth]</code></p>
+      <p>Description: Get own chats <code>[Needs Auth]</code></p>
+    </blockquote>
+    <h3 id="query-parameters-4"><strong>Query Parameters</strong></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Required</th>
+          <th>Paramenters</th>
+          <th>Default</th>
+          <th>Description</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+    </table>
+    <h3 id="example-4"><strong>Example</strong></h3>
+    <pre><code class="language-js">axios
+  .get(apiURL + &quot;/chat&quot;, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 200
+{
+&quot;status&quot;: 200,
+  &quot;chats&quot;: [
+    {
+      &quot;_id&quot;: &quot;***&quot;,
+      &quot;chatname&quot;: &quot;***&quot;,
+      &quot;participants&quot;: [
+        {
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;firstname&quot;: &quot;***&quot;,
+          &quot;lastname&quot;: &quot;***&quot;
+        },
+        {
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;firstname&quot;: &quot;***&quot;,
+          &quot;lastname&quot;: &quot;***&quot;
+        },
+        ...
+      ],
+      &quot;lastMessage&quot;: {
+        &quot;message&quot;: &quot;***&quot;,
+        &quot;_id&quot;: &quot;***&quot;,
+        &quot;date&quot;: &quot;***&quot;
+      }
+    },
+    ...
+  ]
+}</code></pre>
+    <h2 id="post-apichatmessage"><code>POST /api/chat/message</code></h2>
+    <blockquote>
+      <p>Description: Send a message <code>[Needs Auth]</code></p>
     </blockquote>
     <h3 id="query-parameters-5"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-    </table>
-    <h3 id="example-5"><strong>Example</strong></h3>
-    <pre><code class="language-js">axios
-  .get(apiURL + &quot;/buddy/card/own&quot;, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 200
-{
-  &quot;status&quot;: 200,
-  &quot;cards&quot;: [
-    {
-      &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    },
-    {
-      ...
-    }
-  ]
-}</code></pre>
-    <h2 id="get-apibuddycardother"><code>GET /api/buddy/card/other</code></h2>
-    <blockquote>
-      <p>Description: Get other cards <code>[Needs Auth]</code></p>
-    </blockquote>
-    <h3 id="query-parameters-6"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-    </table>
-    <h3 id="example-6"><strong>Example</strong></h3>
-    <pre><code class="language-js">axios
-  .get(apiURL + &quot;/buddy/card/other&quot;, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 200
-{
-  &quot;status&quot;: 200,
-  &quot;cards&quot;: [
-    {
-      &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    },
-    {
-      ...
-    }
-  ]
-}</code></pre>
-    <h2 id="get-apibuddycardaccept"><code>GET /api/buddy/card/accept</code></h2>
-    <blockquote>
-      <p>Description: Accept card <code>[Needs Auth]</code></p>
-    </blockquote>
-    <h3 id="query-parameters-7"><strong>Query Parameters</strong></h3>
     <table>
       <thead>
         <tr>
@@ -821,19 +706,27 @@ STATUS 200
           <td>x</td>
           <td><code>_id</code></td>
           <td>-</td>
-          <td>ID of the card</td>
+          <td>Chat ID</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td><code>message</code></td>
+          <td>-</td>
+          <td>Message to send</td>
           <td><code>string</code></td>
         </tr>
       </tbody>
     </table>
-    <h3 id="example-7"><strong>Example</strong></h3>
+    <h3 id="example-5"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = JSON.stringify({
   _id: { value },
-  _acceptor: { value },
+  message: { value },
 });
 axios
-  .put(apiURL + &quot;/buddy/card/accept&quot;, data, {
+  .post(apiURL + &quot;/chat&quot;, data, {
     headers: {
+      &quot;Content-Type&quot;: &quot;application/json&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -845,77 +738,34 @@ axios
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 200
+STATUS 201
 {
-  &quot;status&quot;: 200,
-  &quot;cards&quot;: [
+  &quot;status&quot;: 201,
+  &quot;chat&quot;: [
     {
       &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    },
-    {
-      ...
-    }
-  ]
-}</code></pre>
-    <h2 id="get-apibuddycardaccepted">
-      <code>GET /api/buddy/card/accepted</code>
-    </h2>
-    <blockquote>
-      <p>Description: Get accepted cards <code>[Needs Auth]</code></p>
-    </blockquote>
-    <h3 id="query-parameters-8"><strong>Query Parameters</strong></h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Required</th>
-          <th>Paramenters</th>
-          <th>Default</th>
-          <th>Description</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-    </table>
-    <h3 id="example-8"><strong>Example</strong></h3>
-    <pre><code class="language-js">axios
-  .get(apiURL + &quot;/buddy/card/other&quot;, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  .then((response) =&gt; {
-    // Your code
-  })
-  .catch((error) =&gt; {
-    // Error handling
-  });</code></pre>
-    <pre><code class="language-json">RESPONSE
-
-STATUS 200
-{
-  &quot;status&quot;: 200,
-  &quot;cards&quot;: [
-    {
-      &quot;_id&quot;: &quot;***&quot;,
-      &quot;_sender&quot;: &quot;***&quot;,
-      &quot;_acceptor&quot;: &quot;***&quot;,
-      &quot;firstname&quot;: &quot;***&quot;,
-      &quot;lastname&quot;: &quot;***&quot;,
-      &quot;nationality&quot;: &quot;***&quot;,
-      &quot;bio&quot;: &quot;***&quot;,
-      &quot;title&quot;: &quot;***&quot;,
-      &quot;text&quot;: &quot;***&quot;,
-      &quot;type&quot;: &quot;***&quot;,
-    },
-    {
-      ...
+      &quot;chatname&quot;: &quot;***&quot;,
+      &quot;participants&quot;: [
+        {
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;firstname&quot;: &quot;***&quot;,
+          &quot;lastname&quot;: &quot;***&quot;
+        },
+        ...
+      ],
+      &quot;chatlog&quot;: [
+        {
+          &quot;message&quot;: &quot;***&quot;,
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;date&quot;: &quot;***&quot;
+        },
+                {
+          &quot;message&quot;: &quot;***&quot;,
+          &quot;_id&quot;: &quot;***&quot;,
+          &quot;date&quot;: &quot;***&quot;
+        },
+        ...
+      ]
     }
   ]
 }</code></pre>

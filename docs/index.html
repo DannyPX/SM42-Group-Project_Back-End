@@ -355,7 +355,7 @@
   <body>
     <h1 id="local-buddy">Local Buddy</h1>
     <blockquote>
-      <p>Version: <code>0.2</code></p>
+      <p>Version: <code>0.4</code></p>
     </blockquote>
     <blockquote>
       <p>Author:</p>
@@ -394,7 +394,7 @@
         </tr>
         <tr>
           <td>Version</td>
-          <td><code>.V2</code></td>
+          <td><code>.V3</code></td>
         </tr>
         <tr>
           <td>Docs</td>
@@ -451,7 +451,7 @@
         </tr>
         <tr>
           <td>Version</td>
-          <td><code>.V1</code></td>
+          <td><code>.V2</code></td>
         </tr>
         <tr>
           <td>Docs</td>
@@ -488,16 +488,73 @@
           <td>Get one card</td>
         </tr>
         <tr>
-          <td><code>POST /api/buddy/card/newcomer</code></td>
-          <td>Accept and assign user that accepted the card to the card</td>
+          <td><code>GET /api/buddy/card/own</code></td>
+          <td>Get own cards</td>
         </tr>
         <tr>
-          <td><code>GET /api/buddy/chat</code></td>
-          <td>???</td>
+          <td><code>GET /api/buddy/card/other</code></td>
+          <td>Get other cards</td>
         </tr>
         <tr>
-          <td><code>POST /api/buddy/chat</code></td>
-          <td>???</td>
+          <td><code>GET /api/buddy/card/accept</code></td>
+          <td>Accept card</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/buddy/card/accepted</code></td>
+          <td>Get accepted cards</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="buddy-1">Buddy</h3>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base</td>
+          <td><code>/api/chat</code></td>
+        </tr>
+        <tr>
+          <td>Version</td>
+          <td><code>.V1</code></td>
+        </tr>
+        <tr>
+          <td>Docs</td>
+          <td><code>/docs/chat</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>POST /api/chat</code></td>
+          <td>Create a chat</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/chat</code></td>
+          <td>Get one chat</td>
+        </tr>
+        <tr>
+          <td><code>PUT /api/chat</code></td>
+          <td>Update chat info</td>
+        </tr>
+        <tr>
+          <td><code>POST /api/chat/message</code></td>
+          <td>Send message</td>
+        </tr>
+        <tr>
+          <td><code>GET /api/chat/own</code></td>
+          <td>Get own chats</td>
         </tr>
       </tbody>
     </table>
@@ -593,6 +650,21 @@ axios
     <h4 id="changelog-2">Changelog</h4>
     <ul>
       <li>Card Implementation</li>
+    </ul>
+    <h3 id="v04"><code>V0.4</code></h3>
+    <h4 id="changelog-3">Changelog</h4>
+    <ul>
+      <li>Auth token changes to consist of more credentials</li>
+      <li>
+        Card changes to new Auth token
+        <ul>
+          <li>
+            Card requires less parameters to fill in card values due to usage of
+            token data
+          </li>
+          <li>Modifed Buddy Docs</li>
+        </ul>
+      </li>
     </ul>
   </body>
 </html>

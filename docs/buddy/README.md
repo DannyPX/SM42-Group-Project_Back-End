@@ -16,7 +16,7 @@
 |          | `bio`       | -       | Bio of the user            | `string`                 |
 | x        | `title`     | -       | Title of the card          | `string`                 |
 | x        | `text`      | -       | Description of the problem | `string`                 |
-| x        | `type`      | -       | Type of the problem        | `"request" - "question"` |
+| x        | `type`      | -       | Type of the problem        | `"Request" - "Question"` |
 
 ### **Example**
 
@@ -122,7 +122,7 @@ STATUS 200
 | x        | `bio`       | -       | Bio of the user            | `string`                 |
 | x        | `title`     | -       | Title of the card          | `string`                 |
 | x        | `text`      | -       | Description of the problem | `string`                 |
-| x        | `type`      | -       | Type of the problem        | `"request" - "question"` |
+| x        | `type`      | -       | Type of the problem        | `"Request" - "Question"` |
 
 ### **Example**
 
