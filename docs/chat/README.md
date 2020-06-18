@@ -19,7 +19,7 @@
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   participants: [
     {
       value
@@ -34,7 +34,7 @@ let data = JSON.stringify({
 axios
   .post(apiURL + "/chat", data , {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -82,13 +82,13 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   chatname: { value },
 });
 axios
   .put(apiURL + "/chat", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -127,13 +127,13 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .delete(apiURL + "/chat", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -167,13 +167,13 @@ STATUS 410
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + "/chat", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -296,14 +296,14 @@ STATUS 200
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
   message: { value },
 });
 axios
   .post(apiURL + "/chat", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })

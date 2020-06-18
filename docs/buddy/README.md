@@ -21,7 +21,7 @@
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   bio: { value },
   title: { value },
   text: { value },
@@ -30,7 +30,7 @@ let data = JSON.stringify({
 axios
   .post(apiURL + "/buddy/card", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -127,7 +127,7 @@ STATUS 200
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
   bio: { value },
   title: { value },
@@ -137,7 +137,7 @@ let data = JSON.stringify({
 axios
   .put(apiURL + "/buddy/card", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -182,13 +182,13 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .delete(apiURL + "/buddy/card", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -222,13 +222,13 @@ STATUS 410
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + "/buddy/card", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   })
   .then((response) => {
@@ -376,7 +376,7 @@ STATUS 200
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
   _acceptor: { value },
 });

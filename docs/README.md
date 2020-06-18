@@ -69,13 +69,15 @@
 ### Axios
 
 ```js
-let data = JSON.stringify({
+import qs from 'qs'
+
+let data = qs.stringify({
   {parameterName}: {value}
 });
 axios
   .{typeRequest}(apiURL + "/{requestName}", data, {
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/x-www-form-urlencoded"
     }
   })
   .then(response => {
@@ -87,14 +89,15 @@ axios
 ```
 
 ### Fetch
-
 ```js
+import qs from 'qs'
+
 fetch("apiURL" + "/{requestName}", {
   method: '{typeRequest}',
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/x-www-form-urlencoded"
   },
-  body: JSON.stringify({
+  body: qs.stringify({
     {parameterName}: {value}
   })
 })

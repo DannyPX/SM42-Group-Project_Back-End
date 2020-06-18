@@ -45,7 +45,7 @@ function updateUser(user) {
 
 function generateToken(data) {
   return tokenManager.generate({
-    expireAfterSeconds: false,
+    expireAfterSeconds: 24 * 60 * 60,
     size: 64,
     data: {
       _id: data._id,

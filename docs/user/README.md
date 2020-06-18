@@ -23,7 +23,7 @@
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   username: { value },
   password: { value },
   name: { value },
@@ -32,7 +32,7 @@ let data = JSON.stringify({
 axios
   .post(apiURL + "/user", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   })
   .then((response) => {
@@ -124,7 +124,7 @@ STATUS 200
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
   username: { value },
   password: { value },
@@ -136,7 +136,7 @@ let data = JSON.stringify({
 axios
   .put(apiURL + "/user", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -179,13 +179,13 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .delete(apiURL + "/user", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })
@@ -219,13 +219,13 @@ STATUS 410
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + "/user", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   })
   .then((response) => {
@@ -267,14 +267,14 @@ STATUS 201
 ### **Example**
 
 ```js
-let data = JSON.stringify({
+let data = qs.stringify({
   username: { value },
   password: { value },
 });
 axios
   .post(apiURL + "/user/auth", data, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   })
   .then((response) => {

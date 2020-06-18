@@ -1,6 +1,5 @@
 // Package Dependency Injection
 const mongoose = require("mongoose");
-const { createCard, getAllCards, updateCard } = require("./buddyContext");
 const Schema = mongoose.Schema;
 
 // Local Module Dependency Injection
