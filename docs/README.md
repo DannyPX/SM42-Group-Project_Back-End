@@ -152,3 +152,9 @@ fetch("apiURL" + "/{requestName}", {
 - Card changes to new Auth token
   - Card requires less parameters to fill in card values due to usage of token data
   - Modifed Buddy Docs
+
+### `V0.5`
+
+#### Changelog
+
+- Chat Implementation
