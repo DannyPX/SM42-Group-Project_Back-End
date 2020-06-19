@@ -162,16 +162,11 @@ app.delete(
     });
   }),
   async function (req, res) {
-    if (typeof req.body._id == "undefined") {
-      res.status(400);
-      res.json({
-        error: "Not all required fields are filled in",
-      });
-    } else {
-      var response = await userContext.deleteUser(req.body);
-      res.status(response.status);
-      res.json(response);
-    }
+    const { token } = req
+    let data = { _id = token.data._id}
+    var response = await userContext.deleteUser(data);
+    res.status(response.status);
+    res.json(response);
   }
 );
 
