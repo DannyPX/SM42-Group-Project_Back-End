@@ -48,7 +48,7 @@
 | `GET /api/buddy/card/accept`   | Accept card        |
 | `GET /api/buddy/card/accepted` | Get accepted cards |
 
-### Buddy
+### Chat
 
 |         |              |
 | ------- | ------------ |
