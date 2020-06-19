@@ -163,7 +163,7 @@ app.delete(
   }),
   async function (req, res) {
     const { token } = req
-    let data = { _id = token.data._id}
+    let data = { _id: token.data._id}
     var response = await userContext.deleteUser(data);
     res.status(response.status);
     res.json(response);
