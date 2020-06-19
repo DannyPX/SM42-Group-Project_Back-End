@@ -130,26 +130,19 @@ app.put(
     });
   }),
   async function (req, res) {
-    if(typeof req.body._id == "undefined") {
-      res.status(400);
-      res.json({
-        error: "Not all required fields are filled in",
-      });
-    } else {
-      const { token } = req
-      let data = {
-        _id: token.data._id
-      }
-      if(req.body.username == "undefined" || req.body.username == "") { Object.assign(data, { username: req.body.username }) }
-      if(req.body.password == "undefined" || req.body.password == "") { Object.assign(data, { password: req.body.password }) }
-      if(req.body.firstname == "undefined" || req.body.firstname == "") { Object.assign(data, { firstname: req.body.firstname }) }
-      if(req.body.lastname == "undefined" || req.body.lastname == "") { Object.assign(data, { lastname: req.body.lastname }) }
-      if(req.body.nationality == "undefined" || req.body.nationality == "") { Object.assign(data, { nationality: req.body.nationality }) }
-      if(req.body.pc == "undefined" || req.body.pc == "") { Object.assign(data, { pc: req.body.pc }) }
-      var response = await userContext.updateUser(req.body);
-      res.status(response.status);
-      res.json(response);
+    const { token } = req
+    let data = {
+      _id: token.data._id
     }
+    if(req.body.username == "undefined" || req.body.username == "") { Object.assign(data, { username: req.body.username }) }
+    if(req.body.password == "undefined" || req.body.password == "") { Object.assign(data, { password: req.body.password }) }
+    if(req.body.firstname == "undefined" || req.body.firstname == "") { Object.assign(data, { firstname: req.body.firstname }) }
+    if(req.body.lastname == "undefined" || req.body.lastname == "") { Object.assign(data, { lastname: req.body.lastname }) }
+    if(req.body.nationality == "undefined" || req.body.nationality == "") { Object.assign(data, { nationality: req.body.nationality }) }
+    if(req.body.pc == "undefined" || req.body.pc == "") { Object.assign(data, { pc: req.body.pc }) }
+    var response = await userContext.updateUser(req.body);
+    res.status(response.status);
+    res.json(response);
   }
 );
 
