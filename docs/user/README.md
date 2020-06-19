@@ -113,12 +113,12 @@ STATUS 200
 
 | Required | Paramenters   | Default | Description           | Format   |
 | -------- | ------------- | ------- | --------------------- | -------- |
-|         | `username`    | -       | Username of a user    | `string` |
-|         | `password`    | -       | Password of a user    | `string` |
-|         | `firstname`   | -       | Firstname of a user   | `string` |
-|         | `lastname`    | -       | Lastname of a user    | `string` |
-|         | `nationality` | -       | Nationality of a user | `string` |
-|         | `pc`          | -       | Postal Code of a user | `nnnnss` |
+|          | `username`    | -       | Username of a user    | `string` |
+|          | `password`    | -       | Password of a user    | `string` |
+|          | `firstname`   | -       | Firstname of a user   | `string` |
+|          | `lastname`    | -       | Lastname of a user    | `string` |
+|          | `nationality` | -       | Nationality of a user | `string` |
+|          | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
 ### **Example**
 
@@ -170,8 +170,9 @@ STATUS 201
 
 ### **Query Parameters**
 
-| Required | Paramenters | Default | Description  | Format |
-| -------- | ----------- | ------- | ------------ | ------ |
+| Required | Paramenters | Default | Description | Format |
+| -------- | ----------- | ------- | ----------- | ------ |
+
 
 ### **Example**
 
@@ -221,6 +222,46 @@ axios
       "Content-Type": "application/x-www-form-urlencoded",
     },
   })
+  .then((response) => {
+    // Your code
+  })
+  .catch((error) => {
+    // Error handling
+  });
+```
+
+```json
+RESPONSE
+
+STATUS 201
+{
+  "status": 201,
+  "user": {
+    "_id": "***",
+    "username": "***",
+    "firstname": "***",
+    "lastname": "***",
+    "nationality": "***",
+    "pc": "***",
+  }
+}
+```
+
+## `GET /api/user/me`
+
+> Description: Get your user
+
+### **Query Parameters**
+
+| Required | Paramenters | Default | Description | Format |
+| -------- | ----------- | ------- | ----------- | ------ |
+
+
+### **Example**
+
+```js
+axios
+  .get(apiURL + "/user/me")
   .then((response) => {
     // Your code
   })

@@ -26,6 +26,7 @@
 | `PUT /api/user`       | Update a user       |
 | `DELETE /api/user`    | Delete a user       |
 | `GET /api/user`       | Get one user        |
+| `GET /api/user/me`    | Get your user       |
 | `POST /api/user/auth` | Authenticate a user |
 
 ### Buddy
@@ -89,6 +90,7 @@ axios
 ```
 
 ### Fetch
+
 ```js
 import qs from 'qs'
 

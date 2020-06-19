@@ -121,6 +121,25 @@ app.get("/api/user", async function (req, res) {
   }
 });
 
+app.get(
+  "/api/user/me",
+  tokenManager.ensureValidToken((req, res) => {
+    res.status(401);
+    res.json({
+      error: "Invalid Token",
+    });
+  }),
+  async function (req, res) {
+    const { token } = req;
+    let data = {
+      _id: token.data._id,
+    };
+    var response = await userContext.getUser(data);
+    res.status(response.status);
+    res.json(response);
+  }
+);
+
 app.put(
   "/api/user",
   tokenManager.ensureValidToken((req, res) => {
@@ -130,16 +149,28 @@ app.put(
     });
   }),
   async function (req, res) {
-    const { token } = req
+    const { token } = req;
     let data = {
-      _id: token.data._id
+      _id: token.data._id,
+    };
+    if (req.body.username == "undefined" || req.body.username == "") {
+      Object.assign(data, { username: req.body.username });
     }
-    if(req.body.username == "undefined" || req.body.username == "") { Object.assign(data, { username: req.body.username }) }
-    if(req.body.password == "undefined" || req.body.password == "") { Object.assign(data, { password: req.body.password }) }
-    if(req.body.firstname == "undefined" || req.body.firstname == "") { Object.assign(data, { firstname: req.body.firstname }) }
-    if(req.body.lastname == "undefined" || req.body.lastname == "") { Object.assign(data, { lastname: req.body.lastname }) }
-    if(req.body.nationality == "undefined" || req.body.nationality == "") { Object.assign(data, { nationality: req.body.nationality }) }
-    if(req.body.pc == "undefined" || req.body.pc == "") { Object.assign(data, { pc: req.body.pc }) }
+    if (req.body.password == "undefined" || req.body.password == "") {
+      Object.assign(data, { password: req.body.password });
+    }
+    if (req.body.firstname == "undefined" || req.body.firstname == "") {
+      Object.assign(data, { firstname: req.body.firstname });
+    }
+    if (req.body.lastname == "undefined" || req.body.lastname == "") {
+      Object.assign(data, { lastname: req.body.lastname });
+    }
+    if (req.body.nationality == "undefined" || req.body.nationality == "") {
+      Object.assign(data, { nationality: req.body.nationality });
+    }
+    if (req.body.pc == "undefined" || req.body.pc == "") {
+      Object.assign(data, { pc: req.body.pc });
+    }
     var response = await userContext.updateUser(req.body);
     res.status(response.status);
     res.json(response);
@@ -155,8 +186,8 @@ app.delete(
     });
   }),
   async function (req, res) {
-    const { token } = req
-    let data = { _id: token.data._id}
+    const { token } = req;
+    let data = { _id: token.data._id };
     var response = await userContext.deleteUser(data);
     res.status(response.status);
     res.json(response);
