@@ -113,19 +113,17 @@ STATUS 200
 
 | Required | Paramenters   | Default | Description           | Format   |
 | -------- | ------------- | ------- | --------------------- | -------- |
-| x        | `_id`         | -       | ID of a user          | `int`    |
-| x        | `username`    | -       | Username of a user    | `string` |
-| x        | `password`    | -       | Password of a user    | `string` |
-| x        | `firstname`   | -       | Firstname of a user   | `string` |
-| x        | `lastname`    | -       | Lastname of a user    | `string` |
-| x        | `nationality` | -       | Nationality of a user | `string` |
-| x        | `pc`          | -       | Postal Code of a user | `nnnnss` |
+|         | `username`    | -       | Username of a user    | `string` |
+|         | `password`    | -       | Password of a user    | `string` |
+|         | `firstname`   | -       | Firstname of a user   | `string` |
+|         | `lastname`    | -       | Lastname of a user    | `string` |
+|         | `nationality` | -       | Nationality of a user | `string` |
+|         | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
 ### **Example**
 
 ```js
 let data = qs.stringify({
-  _id: { value },
   username: { value },
   password: { value },
   firstname: { value },
@@ -174,18 +172,13 @@ STATUS 201
 
 | Required | Paramenters | Default | Description  | Format |
 | -------- | ----------- | ------- | ------------ | ------ |
-| x        | `_id`       | -       | ID of a user | `int`  |
 
 ### **Example**
 
 ```js
-let data = qs.stringify({
-  _id: { value },
-});
 axios
-  .delete(apiURL + "/user", data, {
+  .delete(apiURL + "/user", {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
     },
   })

@@ -161,3 +161,4 @@ fetch("apiURL" + "/{requestName}", {
 #### Changelog
 
 - Chat Implementation
+- Changed requirements on user/update and user/delete
