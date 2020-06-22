@@ -110,7 +110,7 @@ exports.deleteCard = function (_id) {
   return Cards.findByIdAndDelete(_id)
     .then(() => {
       return {
-        status: 410,
+        status: 204,
       };
     })
     .catch((err) => {

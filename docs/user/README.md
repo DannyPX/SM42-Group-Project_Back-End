@@ -194,9 +194,9 @@ axios
 ```json
 RESPONSE
 
-STATUS 410
+STATUS 204
 {
-    "status": 410
+    "status": 204
 }
 ```
 

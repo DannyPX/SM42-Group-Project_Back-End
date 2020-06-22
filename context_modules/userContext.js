@@ -124,7 +124,7 @@ exports.deleteUser = function (data) {
   return Users.findByIdAndDelete(data._id)
     .then(() => {
       return {
-        status: 410,
+        status: 204,
       };
     })
     .catch((err) => {

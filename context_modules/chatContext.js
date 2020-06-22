@@ -86,7 +86,7 @@ exports.deleteChat = function (_id) {
   return Chats.findByIdAndDelete(_id)
     .then(() => {
       return {
-        status: 410,
+        status: 204,
       };
     })
     .catch((err) => {
