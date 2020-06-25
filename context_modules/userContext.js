@@ -13,6 +13,7 @@ const userSchema = new Schema({
   password: String,
   firstname: String,
   lastname: String,
+  bio: String,
   nationality: String,
   pc: String,
 });
@@ -26,6 +27,7 @@ function responseUser(user) {
     username: user.username,
     firstname: user.firstname,
     lastname: user.lastname,
+    bio: user.bio,
     nationality: user.nationality,
     pc: user.pc,
   };
@@ -52,11 +54,13 @@ function generateToken(data) {
       firstname: data.firstname,
       lastname: data.lastname,
       nationality: data.nationality,
+      bio: data.bio,
     },
   });
 }
 
 exports.createUser = function (data) {
+  data.bio = "Hello, I'm new to Local Buddy";
   let user = new Users({
     ...data,
   });
@@ -100,7 +104,8 @@ exports.getAllUser = function () {
 };
 
 exports.updateUser = function (data) {
-  if (typeof data.password == "undefined" || data.password == "") {} else {
+  if (typeof data.password == "undefined" || data.password == "") {
+  } else {
     var hash = crypto.createHash("sha256");
     var pass = hash.update(data.password, "utf8", "hex");
     data.password = pass.digest("hex");

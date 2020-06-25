@@ -418,6 +418,13 @@
         </tr>
         <tr>
           <td></td>
+          <td><code>bio</code></td>
+          <td>-</td>
+          <td>Bio of the user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td></td>
           <td><code>nationality</code></td>
           <td>-</td>
           <td>Nationality of a user</td>
@@ -433,7 +440,7 @@
       </tbody>
     </table>
     <h3 id="example"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   username: { value },
   password: { value },
   name: { value },
@@ -442,7 +449,7 @@
 axios
   .post(apiURL + &quot;/user&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
     },
   })
   .then((response) =&gt; {
@@ -526,49 +533,49 @@ STATUS 200
       </thead>
       <tbody>
         <tr>
-          <td>x</td>
-          <td><code>_id</code></td>
-          <td>-</td>
-          <td>ID of a user</td>
-          <td><code>int</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
+          <td></td>
           <td><code>username</code></td>
           <td>-</td>
           <td>Username of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
-          <td>x</td>
+          <td></td>
           <td><code>password</code></td>
           <td>-</td>
           <td>Password of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
-          <td>x</td>
+          <td></td>
           <td><code>firstname</code></td>
           <td>-</td>
           <td>Firstname of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
-          <td>x</td>
+          <td></td>
           <td><code>lastname</code></td>
           <td>-</td>
           <td>Lastname of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
-          <td>x</td>
+          <td></td>
+          <td><code>bio</code></td>
+          <td>-</td>
+          <td>Bio of the user</td>
+          <td><code>string</code></td>
+        </tr>
+        <tr>
+          <td></td>
           <td><code>nationality</code></td>
           <td>-</td>
           <td>Nationality of a user</td>
           <td><code>string</code></td>
         </tr>
         <tr>
-          <td>x</td>
+          <td></td>
           <td><code>pc</code></td>
           <td>-</td>
           <td>Postal Code of a user</td>
@@ -577,8 +584,7 @@ STATUS 200
       </tbody>
     </table>
     <h3 id="example-2"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  _id: { value },
+    <pre><code class="language-js">let data = qs.stringify({
   username: { value },
   password: { value },
   firstname: { value },
@@ -589,7 +595,7 @@ STATUS 200
 axios
   .put(apiURL + &quot;/user&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -629,24 +635,11 @@ STATUS 201
           <th>Format</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>x</td>
-          <td><code>_id</code></td>
-          <td>-</td>
-          <td>ID of a user</td>
-          <td><code>int</code></td>
-        </tr>
-      </tbody>
     </table>
     <h3 id="example-3"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
-  _id: { value },
-});
-axios
-  .delete(apiURL + &quot;/user&quot;, data, {
+    <pre><code class="language-js">axios
+  .delete(apiURL + &quot;/user&quot;, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -658,9 +651,9 @@ axios
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 410
+STATUS 204
 {
-    &quot;status&quot;: 410
+    &quot;status&quot;: 204
 }</code></pre>
     <h2 id="get-apiuser-1"><code>GET /api/user</code></h2>
     <blockquote>
@@ -688,15 +681,54 @@ STATUS 410
       </tbody>
     </table>
     <h3 id="example-4"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + &quot;/user&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
     },
   })
+  .then((response) =&gt; {
+    // Your code
+  })
+  .catch((error) =&gt; {
+    // Error handling
+  });</code></pre>
+    <pre><code class="language-json">RESPONSE
+
+STATUS 201
+{
+  &quot;status&quot;: 201,
+  &quot;user&quot;: {
+    &quot;_id&quot;: &quot;***&quot;,
+    &quot;username&quot;: &quot;***&quot;,
+    &quot;firstname&quot;: &quot;***&quot;,
+    &quot;lastname&quot;: &quot;***&quot;,
+    &quot;nationality&quot;: &quot;***&quot;,
+    &quot;pc&quot;: &quot;***&quot;,
+  }
+}</code></pre>
+    <h2 id="get-apiuserme"><code>GET /api/user/me</code></h2>
+    <blockquote>
+      <p>Description: Get your user</p>
+    </blockquote>
+    <h3 id="query-parameters-5"><strong>Query Parameters</strong></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Required</th>
+          <th>Paramenters</th>
+          <th>Default</th>
+          <th>Description</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+    </table>
+    <h3 id="example-5"><strong>Example</strong></h3>
+    <pre><code class="language-js">axios
+  .get(apiURL + &quot;/user/me&quot;)
   .then((response) =&gt; {
     // Your code
   })
@@ -721,7 +753,7 @@ STATUS 201
     <blockquote>
       <p>Description: Authenticate a user</p>
     </blockquote>
-    <h3 id="query-parameters-5"><strong>Query Parameters</strong></h3>
+    <h3 id="query-parameters-6"><strong>Query Parameters</strong></h3>
     <table>
       <thead>
         <tr>
@@ -749,15 +781,15 @@ STATUS 201
         </tr>
       </tbody>
     </table>
-    <h3 id="example-5"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <h3 id="example-6"><strong>Example</strong></h3>
+    <pre><code class="language-js">let data = qs.stringify({
   username: { value },
   password: { value },
 });
 axios
   .post(apiURL + &quot;/user/auth&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
     },
   })
   .then((response) =&gt; {

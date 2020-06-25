@@ -389,13 +389,6 @@
       </thead>
       <tbody>
         <tr>
-          <td></td>
-          <td><code>bio</code></td>
-          <td>-</td>
-          <td>Bio of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
           <td>x</td>
           <td><code>title</code></td>
           <td>-</td>
@@ -419,7 +412,7 @@
       </tbody>
     </table>
     <h3 id="example"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   bio: { value },
   title: { value },
   text: { value },
@@ -428,7 +421,7 @@
 axios
   .post(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -527,13 +520,6 @@ STATUS 200
         </tr>
         <tr>
           <td>x</td>
-          <td><code>bio</code></td>
-          <td>-</td>
-          <td>Bio of the user</td>
-          <td><code>string</code></td>
-        </tr>
-        <tr>
-          <td>x</td>
           <td><code>title</code></td>
           <td>-</td>
           <td>Title of the card</td>
@@ -556,7 +542,7 @@ STATUS 200
       </tbody>
     </table>
     <h3 id="example-2"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
   bio: { value },
   title: { value },
@@ -566,7 +552,7 @@ STATUS 200
 axios
   .put(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -619,13 +605,13 @@ STATUS 201
       </tbody>
     </table>
     <h3 id="example-3"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
 });
 axios
   .delete(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -637,9 +623,9 @@ axios
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 410
+STATUS 204
 {
-    &quot;status&quot;: 410
+    &quot;status&quot;: 204
 }</code></pre>
     <h2 id="get-apibuddycard-1"><code>GET /api/buddy/card</code></h2>
     <blockquote>
@@ -667,13 +653,13 @@ STATUS 410
       </tbody>
     </table>
     <h3 id="example-4"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + &quot;/buddy/card&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
     },
   })
   .then((response) =&gt; {
@@ -827,7 +813,7 @@ STATUS 200
       </tbody>
     </table>
     <h3 id="example-7"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
   _acceptor: { value },
 });

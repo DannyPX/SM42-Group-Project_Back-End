@@ -153,26 +153,39 @@ app.put(
     let data = {
       _id: token.data._id,
     };
-    console.log(req.body)
-    if (typeof req.body.username == "undefined" || req.body.username == "") {} else {
+    console.log(req.body);
+    if (typeof req.body.username == "undefined" || req.body.username == "") {
+    } else {
       Object.assign(data, { username: req.body.username });
     }
-    if (typeof req.body.password == "undefined" || req.body.password == "") {} else {
+    if (typeof req.body.password == "undefined" || req.body.password == "") {
+    } else {
       Object.assign(data, { password: req.body.password });
     }
-    if (typeof req.body.firstname == "undefined" || req.body.firstname == "") {} else {
+    if (typeof req.body.firstname == "undefined" || req.body.firstname == "") {
+    } else {
       Object.assign(data, { firstname: req.body.firstname });
     }
-    if (typeof req.body.lastname == "undefined" || req.body.lastname == "") {} else {
+    if (typeof req.body.lastname == "undefined" || req.body.lastname == "") {
+    } else {
       Object.assign(data, { lastname: req.body.lastname });
     }
-    if (typeof req.body.nationality == "undefined" || req.body.nationality == "") {} else {
+    if (typeof req.body.bio == "undefined" || req.body.bio == "") {
+    } else {
+      Object.assign(data, { bio: req.body.bio });
+    }
+    if (
+      typeof req.body.nationality == "undefined" ||
+      req.body.nationality == ""
+    ) {
+    } else {
       Object.assign(data, { nationality: req.body.nationality });
     }
-    if (typeof req.body.pc == "undefined" || req.body.pc == "") {} else {
+    if (typeof req.body.pc == "undefined" || req.body.pc == "") {
+    } else {
       Object.assign(data, { pc: req.body.pc });
     }
-    console.log(data)
+    console.log(data);
     var response = await userContext.updateUser(data);
     res.status(response.status);
     res.json(response);
@@ -240,7 +253,6 @@ app.post(
         firstname: token.data.firstname,
         lastname: token.data.lastname,
         nationality: token.data.nationality,
-        bio: req.body.bio,
         title: req.body.title,
         text: req.body.text,
         type: req.body.type,
@@ -288,7 +300,6 @@ app.put(
     if (await buddyContext.checkOwnCard(data)) {
       if (
         typeof req.body._id == "undefined" ||
-        typeof req.body.bio == "undefined" ||
         typeof req.body.title == "undefined" ||
         typeof req.body.text == "undefined" ||
         typeof req.body.type == "undefined"
@@ -304,7 +315,6 @@ app.put(
           firstname: token.data.firstname,
           lastname: token.data.lastname,
           nationality: token.data.nationality,
-          bio: req.body.bio,
           title: req.body.title,
           text: req.body.text,
           type: req.body.type,

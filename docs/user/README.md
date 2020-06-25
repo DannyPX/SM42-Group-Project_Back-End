@@ -17,6 +17,7 @@
 | x        | `password`    | -       | Password of a user    | `string` |
 | x        | `firstname`   | -       | Firstname of a user   | `string` |
 | x        | `lastname`    | -       | Lastname of a user    | `string` |
+|          | `bio`         | -       | Bio of a user         | `string` |
 |          | `nationality` | -       | Nationality of a user | `string` |
 |          | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
@@ -54,6 +55,7 @@ STATUS 201
         "username": "***",
         "firstname": "***",
         "lastname": "***",
+        "bio": "***",
         "nationality": "***",
         "pc": "***",
     }
@@ -95,6 +97,7 @@ STATUS 200
       "username": "***",
       "firstname": "***",
       "lastname": "***",
+      "bio": "***",
       "nationality": "***",
       "pc": "***",
     },
@@ -117,6 +120,7 @@ STATUS 200
 |          | `password`    | -       | Password of a user    | `string` |
 |          | `firstname`   | -       | Firstname of a user   | `string` |
 |          | `lastname`    | -       | Lastname of a user    | `string` |
+|          | `bio`         | -       | Bio of a user         | `string` |
 |          | `nationality` | -       | Nationality of a user | `string` |
 |          | `pc`          | -       | Postal Code of a user | `nnnnss` |
 
@@ -128,6 +132,7 @@ let data = qs.stringify({
   password: { value },
   firstname: { value },
   lastname: { value },
+  bio: { value },
   nationality: { value },
   pc: { value },
 });
@@ -157,6 +162,7 @@ STATUS 201
     "username": "***",
     "firstname": "***",
     "lastname": "***",
+    "bio": "***",
     "nationality": "***",
     "pc": "***",
   },
@@ -241,6 +247,7 @@ STATUS 201
     "username": "***",
     "firstname": "***",
     "lastname": "***",
+    "bio": "***",
     "nationality": "***",
     "pc": "***",
   }
@@ -281,6 +288,7 @@ STATUS 201
     "username": "***",
     "firstname": "***",
     "lastname": "***",
+    "bio": "***",
     "nationality": "***",
     "pc": "***",
   }

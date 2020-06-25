@@ -405,7 +405,7 @@
       </tbody>
     </table>
     <h3 id="example"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   participants: [
     {
       value
@@ -420,7 +420,7 @@
 axios
   .post(apiURL + &quot;/chat&quot;, data , {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -476,13 +476,13 @@ STATUS 201
       </tbody>
     </table>
     <h3 id="example-1"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   chatname: { value },
 });
 axios
   .put(apiURL + &quot;/chat&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -529,13 +529,13 @@ STATUS 201
       </tbody>
     </table>
     <h3 id="example-2"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
 });
 axios
   .delete(apiURL + &quot;/chat&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -547,9 +547,9 @@ axios
   });</code></pre>
     <pre><code class="language-json">RESPONSE
 
-STATUS 410
+STATUS 204
 {
-    &quot;status&quot;: 410
+    &quot;status&quot;: 204
 }</code></pre>
     <h2 id="get-apichat"><code>GET /api/chat</code></h2>
     <blockquote>
@@ -577,13 +577,13 @@ STATUS 410
       </tbody>
     </table>
     <h3 id="example-3"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
 });
 axios
   .get(apiURL + &quot;/chat&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })
@@ -719,14 +719,14 @@ STATUS 200
       </tbody>
     </table>
     <h3 id="example-5"><strong>Example</strong></h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">let data = qs.stringify({
   _id: { value },
   message: { value },
 });
 axios
   .post(apiURL + &quot;/chat&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;,
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
       Authorization: `Bearer ${token}`,
     },
   })

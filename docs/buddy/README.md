@@ -13,7 +13,6 @@
 
 | Required | Paramenters | Default | Description                | Format                   |
 | -------- | ----------- | ------- | -------------------------- | ------------------------ |
-|          | `bio`       | -       | Bio of the user            | `string`                 |
 | x        | `title`     | -       | Title of the card          | `string`                 |
 | x        | `text`      | -       | Description of the problem | `string`                 |
 | x        | `type`      | -       | Type of the problem        | `"Request" - "Question"` |
@@ -22,7 +21,6 @@
 
 ```js
 let data = qs.stringify({
-  bio: { value },
   title: { value },
   text: { value },
   type: { value },
@@ -54,7 +52,6 @@ STATUS 201
     "firstname": "***",
     "lastname": "***",
     "nationality": "***",
-    "bio": "***",
     "title": "***",
     "text": "***",
     "type": "***",
@@ -98,7 +95,6 @@ STATUS 200
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -119,7 +115,6 @@ STATUS 200
 | Required | Paramenters | Default | Description                | Format                   |
 | -------- | ----------- | ------- | -------------------------- | ------------------------ |
 | x        | `_id`       | -       | ID of a card               | `int`                    |
-| x        | `bio`       | -       | Bio of the user            | `string`                 |
 | x        | `title`     | -       | Title of the card          | `string`                 |
 | x        | `text`      | -       | Description of the problem | `string`                 |
 | x        | `type`      | -       | Type of the problem        | `"Request" - "Question"` |
@@ -129,7 +124,6 @@ STATUS 200
 ```js
 let data = qs.stringify({
   _id: { value },
-  bio: { value },
   title: { value },
   text: { value },
   type: { value },
@@ -161,7 +155,6 @@ STATUS 201
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -251,7 +244,6 @@ STATUS 201
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -299,7 +291,6 @@ STATUS 200
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -351,7 +342,6 @@ STATUS 200
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -407,7 +397,6 @@ STATUS 200
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",
@@ -460,7 +449,6 @@ STATUS 200
       "firstname": "***",
       "lastname": "***",
       "nationality": "***",
-      "bio": "***",
       "title": "***",
       "text": "***",
       "type": "***",

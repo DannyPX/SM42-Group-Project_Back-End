@@ -431,6 +431,10 @@
           <td>Get one user</td>
         </tr>
         <tr>
+          <td><code>GET /api/user/me</code></td>
+          <td>Get your user</td>
+        </tr>
+        <tr>
           <td><code>POST /api/user/auth</code></td>
           <td>Authenticate a user</td>
         </tr>
@@ -505,7 +509,7 @@
         </tr>
       </tbody>
     </table>
-    <h3 id="buddy-1">Buddy</h3>
+    <h3 id="chat">Chat</h3>
     <table>
       <thead>
         <tr>
@@ -562,13 +566,15 @@
       Javascript Usage (no Auth requests)
     </h2>
     <h3 id="axios">Axios</h3>
-    <pre><code class="language-js">let data = JSON.stringify({
+    <pre><code class="language-js">import qs from &#39;qs&#39;
+
+let data = qs.stringify({
   {parameterName}: {value}
 });
 axios
   .{typeRequest}(apiURL + &quot;/{requestName}&quot;, data, {
     headers: {
-      &quot;Content-Type&quot;: &quot;application/json&quot;
+      &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;
     }
   })
   .then(response =&gt; {
@@ -578,12 +584,14 @@ axios
     // Error handling
   })</code></pre>
     <h3 id="fetch">Fetch</h3>
-    <pre><code class="language-js">fetch(&quot;apiURL&quot; + &quot;/{requestName}&quot;, {
+    <pre><code class="language-js">import qs from &#39;qs&#39;
+
+fetch(&quot;apiURL&quot; + &quot;/{requestName}&quot;, {
   method: &#39;{typeRequest}&#39;,
   headers: {
-    &quot;Content-Type&quot;: &quot;application/json&quot;
+    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;
   },
-  body: JSON.stringify({
+  body: qs.stringify({
     {parameterName}: {value}
   })
 })
@@ -670,6 +678,7 @@ axios
     <h4 id="changelog-4">Changelog</h4>
     <ul>
       <li>Chat Implementation</li>
+      <li>Changed requirements on user/update and user/delete</li>
     </ul>
   </body>
 </html>
