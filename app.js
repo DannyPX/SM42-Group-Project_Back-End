@@ -248,9 +248,6 @@ app.post(
       const { token } = req;
       let data = {
         _sender: token.data._id,
-        firstname: token.data.firstname,
-        lastname: token.data.lastname,
-        nationality: token.data.nationality,
         title: req.body.title,
         text: req.body.text,
         type: req.body.type,
@@ -313,6 +310,7 @@ app.put(
           firstname: token.data.firstname,
           lastname: token.data.lastname,
           nationality: token.data.nationality,
+          bio: token.data.bio,
           title: req.body.title,
           text: req.body.text,
           type: req.body.type,
