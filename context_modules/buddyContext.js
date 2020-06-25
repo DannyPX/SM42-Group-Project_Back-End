@@ -88,6 +88,7 @@ exports.getAllCards = function () {
     .then((doc) => {
       var cards = [];
       var foreachProm = new Promise((resolve, reject) => {
+        var count = 0
         doc.forEach(async function (element, index) {
           await userContext
             .getUser({ _id: element._sender })
@@ -114,7 +115,8 @@ exports.getAllCards = function () {
             .catch(() => {
               reject();
             });
-          if (index === doc.length - 1) resolve();
+            count++
+          if (count === doc.length) resolve();
         });
       });
       return foreachProm.then(() => {
@@ -218,6 +220,7 @@ exports.getOwnCards = function (_id) {
       var cards = [];
       var foreachProm = new Promise((resolve, reject) => {
         doc.forEach(async function (element, index) {
+          var count = 0
           await userContext
             .getUser({ _id: element._sender })
             .then((result) => {
@@ -243,7 +246,8 @@ exports.getOwnCards = function (_id) {
             .catch(() => {
               reject();
             });
-          if (index === doc.length - 1) resolve();
+            count++
+          if (count === doc.length) resolve();
         });
       });
       return foreachProm.then(() => {
@@ -266,6 +270,7 @@ exports.getAllbutOwn = function (_id) {
     .then((doc) => {
       var cards = [];
       var foreachProm = new Promise((resolve, reject) => {
+        var count = 0
         doc.forEach(async function (element, index) {
           if (element._sender != _id) {
             await userContext
@@ -294,8 +299,8 @@ exports.getAllbutOwn = function (_id) {
                 reject();
               });
           }
-
-          if (index === doc.length - 1) resolve();
+          count++
+          if (count === doc.length) resolve()
         });
       });
       return foreachProm.then(() => {
@@ -356,6 +361,7 @@ exports.getOwnAcceptedCards = function (_id) {
     .then((doc) => {
       var cards = [];
       var foreachProm = new Promise((resolve, reject) => {
+        var count = 0
         doc.forEach(async function (element, index) {
           if (element._sender != _id) {
             await userContext
@@ -384,8 +390,8 @@ exports.getOwnAcceptedCards = function (_id) {
                 reject();
               });
           }
-
-          if (index === doc.length - 1) resolve();
+          count++
+          if (count === doc.length) resolve();
         });
       });
       return foreachProm.then(() => {
