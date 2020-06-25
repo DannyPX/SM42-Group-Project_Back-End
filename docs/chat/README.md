@@ -11,10 +11,10 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters    | Default | Description                          | Format   |
-| -------- | -------------- | ------- | ------------------------------------ | -------- |
-| x        | `participants` | -       | IDs of participants(except yourself) | `Array`  |
-|          | `chatname`     | -       | Name of the chat                     | `string` |
+| Required | Paramenters    | Default                    | Description                          | Format   |
+| -------- | -------------- | -------------------------- | ------------------------------------ | -------- |
+| x        | `participants` | -                          | IDs of participants(except yourself) | `Array`  |
+|          | `chatname`     | firstnames of participants | Name of the chat                     | `string` |
 
 ### **Example**
 

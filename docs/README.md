@@ -1,6 +1,6 @@
 # Local Buddy
 
-> Version: `0.4`
+> Version: `0.5`
 
 > Author:
 
