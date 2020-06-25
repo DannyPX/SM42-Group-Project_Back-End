@@ -153,7 +153,6 @@ app.put(
     let data = {
       _id: token.data._id,
     };
-    console.log(req.body);
     if (typeof req.body.username == "undefined" || req.body.username == "") {
     } else {
       Object.assign(data, { username: req.body.username });
@@ -185,7 +184,6 @@ app.put(
     } else {
       Object.assign(data, { pc: req.body.pc });
     }
-    console.log(data);
     var response = await userContext.updateUser(data);
     res.status(response.status);
     res.json(response);

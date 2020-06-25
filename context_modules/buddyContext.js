@@ -11,7 +11,6 @@ const cardSchema = new Schema({
   firstname: String,
   lastname: String,
   nationality: String,
-  bio: String,
   title: String,
   text: String,
   type: String, // Type of card, e.g. Request, Question
