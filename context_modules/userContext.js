@@ -100,12 +100,12 @@ exports.getAllUser = function () {
 };
 
 exports.updateUser = function (data) {
-  if (data.password == "undefined" || data.password == "") {} else {
+  if (typeof data.password == "undefined" || data.password == "") {} else {
     var hash = crypto.createHash("sha256");
     var pass = hash.update(data.password, "utf8", "hex");
     data.password = pass.digest("hex");
   }
-  return Users.findByIdAndUpdate(data._id, updateUser(data))
+  return Users.findByIdAndUpdate(data._id, data)
     .then(() => {
       var result = generateToken(data);
       return {
