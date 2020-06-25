@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 
 // Local Module Dependency Injection
 const userContext = require("./userContext");
-const { resolveConfig } = require("prettier");
-const { type } = require("jquery");
 
 /* Node.js module: nbContext */
 // Mongoose schema

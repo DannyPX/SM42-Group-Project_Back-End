@@ -24,7 +24,6 @@ const markdown = require("./modules/markdown");
 const userContext = require("./context_modules/userContext");
 const buddyContext = require("./context_modules/buddyContext");
 const chatContext = require("./context_modules/chatContext");
-const { type } = require("jquery");
 
 // Markdown API document
 markdown.init();
