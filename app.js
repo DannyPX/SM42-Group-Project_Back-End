@@ -350,6 +350,11 @@ app.delete(
         res.status(response.status);
         res.json(response);
       }
+    } else {
+      res.status(400);
+      res.json({
+        error: "This is not your card",
+      });
     }
   }
 );
