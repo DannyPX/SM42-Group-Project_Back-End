@@ -153,22 +153,22 @@ app.put(
     let data = {
       _id: token.data._id,
     };
-    if (req.body.username == "undefined" || req.body.username == "") {
+    if (req.body.username == "undefined" || req.body.username == "") {} else {
       Object.assign(data, { username: req.body.username });
     }
-    if (req.body.password == "undefined" || req.body.password == "") {
+    if (req.body.password == "undefined" || req.body.password == "") {} else {
       Object.assign(data, { password: req.body.password });
     }
-    if (req.body.firstname == "undefined" || req.body.firstname == "") {
+    if (req.body.firstname == "undefined" || req.body.firstname == "") {} else {
       Object.assign(data, { firstname: req.body.firstname });
     }
-    if (req.body.lastname == "undefined" || req.body.lastname == "") {
+    if (req.body.lastname == "undefined" || req.body.lastname == "") {} else {
       Object.assign(data, { lastname: req.body.lastname });
     }
-    if (req.body.nationality == "undefined" || req.body.nationality == "") {
+    if (req.body.nationality == "undefined" || req.body.nationality == "") {} else {
       Object.assign(data, { nationality: req.body.nationality });
     }
-    if (req.body.pc == "undefined" || req.body.pc == "") {
+    if (req.body.pc == "undefined" || req.body.pc == "") {} else {
       Object.assign(data, { pc: req.body.pc });
     }
     var response = await userContext.updateUser(req.body);

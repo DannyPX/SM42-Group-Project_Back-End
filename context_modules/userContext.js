@@ -100,7 +100,7 @@ exports.getAllUser = function () {
 };
 
 exports.updateUser = function (data) {
-  if (data.password == "undefined" || data.password == "") {
+  if (data.password == "undefined" || data.password == "") {} else {
     var hash = crypto.createHash("sha256");
     var pass = hash.update(data.password, "utf8", "hex");
     data.password = pass.digest("hex");
