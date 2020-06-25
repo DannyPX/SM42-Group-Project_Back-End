@@ -21,12 +21,8 @@
 ```js
 let data = qs.stringify({
   participants: [
-    {
-      value
-    },
-    {
-      value
-    },
+    "ABCDEFGH",
+    "ABCDEFGH",
     ...
   ],
   chatname: { value }
