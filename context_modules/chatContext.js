@@ -19,7 +19,7 @@ const chatSchema = new Schema({
   },
 });
 
-// Mongoose card init
+// Mongoose chat init
 const Chats = mongoose.model("Chat", chatSchema);
 
 function responseChat(chat) {
@@ -102,7 +102,7 @@ exports.getChat = function (data) {
     .then((doc) => {
       return {
         status: 201,
-        card: responseChat(doc),
+        chat: responseChat(doc),
       };
     })
     .catch((err) => {
@@ -165,7 +165,7 @@ exports.sendMessage = function (data) {
     .then((doc) => {
       return {
         status: 201,
-        card: responseChat(doc),
+        chat: responseChat(doc),
       };
     })
     .catch((err) => {
