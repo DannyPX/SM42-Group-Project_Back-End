@@ -41,10 +41,10 @@ axios
 ```json
 RESPONSE
 
-STATUS 201
+STATUS 200
 {
-  "status": 201,
-  "chat": [
+"status": 200,
+  "chats": [
     {
       "_id": "***",
       "chatname": "***",
@@ -54,9 +54,20 @@ STATUS 201
           "firstname": "***",
           "lastname": "***"
         },
+        {
+          "_id": "***",
+          "firstname": "***",
+          "lastname": "***"
+        },
         ...
-      ]
-    }
+      ],
+      "lastMessage": {
+        "message": "***",
+        "_id": "***",
+        "date": "***"
+      }
+    },
+    ...
   ]
 }
 ```

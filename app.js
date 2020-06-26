@@ -452,13 +452,13 @@ app.post(
     });
   }),
   async function (req, res) {
+    const { token } = req;
     if (typeof req.body.participants == "undefined") {
       res.status(400);
       res.json({
         error: "Not all required fields are filled in",
       });
     } else {
-      const { token } = req;
       var participants = [];
       var chattemp = "";
       var chatname = "";
@@ -491,12 +491,17 @@ app.post(
         ) {
           chatname = chattemp.substr(2);
         }
-        var response = await chatContext.createChat({
-          participants: participants,
-          chatname: chatname,
-        });
-        res.status(response.status);
-        res.json(response);
+        var response;
+        await chatContext
+          .createChat({
+            participants: participants,
+            chatname: chatname,
+          })
+          .then(async () => {
+            response = await chatContext.getOwnChats({ _id: token.data._id });
+            res.status(response.status);
+            res.json(response);
+          });
       });
     }
   }

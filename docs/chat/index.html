@@ -392,7 +392,7 @@
           <td>x</td>
           <td><code>participants</code></td>
           <td>-</td>
-          <td>IDs of participants(except yourself)</td>
+          <td>IDs of the participant</td>
           <td><code>Array</code></td>
         </tr>
         <tr>
@@ -406,11 +406,7 @@
     </table>
     <h3 id="example"><strong>Example</strong></h3>
     <pre><code class="language-js">let data = qs.stringify({
-  participants: [
-    {&quot;_id&quot;: &quot;USER1IDABCDEFGH&quot;},
-    {&quot;_id&quot;: &quot;USER2IDABCDEFGH&quot;},
-    ...
-  ],
+  participants: { value }
   chatname: { value }
 })
 axios
