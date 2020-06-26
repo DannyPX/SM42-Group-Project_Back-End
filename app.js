@@ -462,7 +462,7 @@ app.post(
       var participants = [];
       var chattemp = "";
       var chatname = "";
-      var result = JSON.parse(req.body.participants);
+      var result = [{ _id: req.body._id }];
       result.push({
         _id: token.data._id,
       });

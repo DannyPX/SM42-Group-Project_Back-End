@@ -11,20 +11,16 @@
 
 ### **Query Parameters**
 
-| Required | Paramenters    | Default                    | Description                          | Format   |
-| -------- | -------------- | -------------------------- | ------------------------------------ | -------- |
-| x        | `participants` | -                          | IDs of participants(except yourself) | `Array`  |
-|          | `chatname`     | firstnames of participants | Name of the chat                     | `string` |
+| Required | Paramenters    | Default                    | Description            | Format   |
+| -------- | -------------- | -------------------------- | ---------------------- | -------- |
+| x        | `participants` | -                          | IDs of the participant | `Array`  |
+|          | `chatname`     | firstnames of participants | Name of the chat       | `string` |
 
 ### **Example**
 
 ```js
 let data = qs.stringify({
-  participants: [
-    {"_id": "USER1IDABCDEFGH"},
-    {"_id": "USER2IDABCDEFGH"},
-    ...
-  ],
+  participants: { value }
   chatname: { value }
 })
 axios
