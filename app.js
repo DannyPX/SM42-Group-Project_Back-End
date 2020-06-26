@@ -507,8 +507,8 @@ app.post(
   }
 );
 
-app.get(
-  "/api/chat",
+app.post(
+  "/api/chat/get",
   tokenManager.ensureValidToken((req, res) => {
     res.status(401);
     res.json({
