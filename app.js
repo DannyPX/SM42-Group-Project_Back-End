@@ -468,21 +468,23 @@ app.post(
       });
       new Promise((resolve, reject) => {
         result.forEach(async function (element, index, array) {
-          var user = await userContext.getUser({
+          await userContext.getUser({
             _id: element._id,
+          }).then((result) => {
+            console.log(result)
+            participants.push({
+              _id: result.user._id,
+              firstname: result.user.firstname,
+              lastname: result.user.lastname,
+            });
+            if (
+              req.body.chatname == "" ||
+              typeof req.body.chatname == "undefined"
+            ) {
+              chattemp += ", " + result.user.firstname;
+            }
+            if (index === array.length - 1) resolve();
           });
-          participants.push({
-            _id: user.user._id,
-            firstname: user.user.firstname,
-            lastname: user.user.lastname,
-          });
-          if (
-            req.body.chatname == "" ||
-            typeof req.body.chatname == "undefined"
-          ) {
-            chattemp += ", " + user.user.firstname;
-          }
-          if (index === array.length - 1) resolve();
         });
       }).then(async () => {
         if (
